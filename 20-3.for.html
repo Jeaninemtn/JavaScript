@@ -24,6 +24,11 @@
                 text-align: center;
                 line-height: 50px;
             }
+
+            .bgc {
+                background-color: pink;
+            }
+
         </style>
     </head>
     <body>
@@ -41,6 +46,7 @@
                 const div = $(`<div class="ball">${i + 1}</div>`);
                 console.log('what is', div);
                 rect.append(div);
+                div.addClass('bgc');
 
                 // 在父層append球球
             }
