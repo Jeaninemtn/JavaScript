@@ -8,19 +8,16 @@
 </head>
 <body>
     <div class="abc">1</div>
+    <div class="abc">2</div>
 
     <script>
-        let a = 'AB';
+        let str = '中文字 Hello David \u4E2D David2';
 
-        console.log(parseInt(a));
-        console.log(parseInt(a, 16));
-
-        // 十六進位 A = 10, B = 11
-        // 16的一次方*10 + 16的零次方*11 = 171
-
-        console.log( (171).toString() );
-        console.log( (171).toString(16) ); // 整數轉換為 16 進位的字串
-
+        console.log(str.length);
+        console.log(str.slice(5, 10));
+        console.log(str.split('Hello'));
+        console.log(str.split(''));
+        console.log(str.split('David').join('Flora')); // 字串取代
 
     </script>
 </body>
