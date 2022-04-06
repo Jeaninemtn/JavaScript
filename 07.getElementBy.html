@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>getElementBy</title>
+</head>
+<body>
+    <div id="abc">abc</div>
+    <div id="def">def</div>
+    <div id="abc">abc</div>
+    <div id="abc">abc</div>
+
+    <!-- 不要重複 id -->
+    <!-- 但在JS(console)不會除錯 -->
+
+    <script>
+        console.log(abc);
+        console.log(def);
+
+        console.log( document.getElementById('abc') );
+        // 只會拿到一個
+        console.log( document.getElementById('def') );
+        console.log( document.getElementsByTagname('div') );
+
+    </script>
+
+</body>
+</html>
