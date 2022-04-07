@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>for in</title>
+</head>
+<body>
+
+    <div class="rect"></div>
+
+    <script src="./js/jquery-3.6.0.min.js"></script>
+
+    <script>
+
+        const rect = $(".rect");
+
+        const person = {
+            name: "Sherry",
+            gender: "Female",
+            // 10: 123,
+            // 10會被視為字串
+            age: 25,
+        };
+
+        for (let s in person) {
+            console.log(s, person[s]);
+            // rect.append(`<p>${s}: ${person[s]}</p>`);
+            rect.append(`<h3>${s}: ${person[s]}</h3>`);
+        }
+    </script>
+</body>
+</html>
