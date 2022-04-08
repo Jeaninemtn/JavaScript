@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>array</title>
+    </head>
+    <body>
+        <div class="rect"></div>
+        <script src="./js/jquery-3.6.0.min.js"></script>
+        <script>
+            const ar = [2, 5, 7, 100, 32];
+
+            ar[9] = 99; // 原則上索引要連續
+            
+            // 所用到的最大索引值+1就會得到陣列的長度(length)
+
+            // 其他沒有定義的數值從console看就會得到 undefined number
+
+            ar[-2] = -200; // 不要這樣用
+            ar["name"] = "hello"; // 不要這樣用
+
+            // 因為用const宣告所以不能重新定義ar哦
+
+            for (let i = 0; i < ar.length; i++) {
+                console.log(`${i}: ${ar[i]}`, typeof i);
+            }
+
+            // for迴圈 (小括號裡一定要有兩個分號)
+            // for(起始式 ; 條件式 ; 步進式){ 迴圈內容 }
+            // 這邊拿到的 i 都是索引值(number)
+
+            console.log(`------------------`);
+
+            for (let s in ar) {
+                console.log(`${s}: ${ar[s]}`, typeof s);
+            }
+
+            // for/in迴圈所列舉的變數 取得的是key屬性名稱(類型為string) 
+            // 這邊印出來的 s 都是 key(object的key) string 字串
+
+        </script>
+    </body>
+</html>
