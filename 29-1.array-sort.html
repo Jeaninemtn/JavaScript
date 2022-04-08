@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <div class="info">1</div>
+
+        <script src="./js/jquery-3.6.0.min.js"></script>
+        <script>
+
+            const str =
+                "畢竟都已經確定無緣季後賽了，湖人做出輪休「三巨頭」決定也無可厚非";
+            const ar1 = str.split("");
+            const ar2 = [2, 4, 6, 19, 8, 32, 63];
+
+            ar1.sort(); // 盡量不使用中文字做排序 因為中文字使用部首排序 不實用
+            ar2.sort(); // 預設以字串做排序
+
+            console.log(ar1);
+            console.log(ar2);
+
+            // callback function
+            ar2.sort(function (a, b) {
+                console.log({ a, b });
+                return a - b; // 由小到大
+                return b - a; // 由大到小
+            });
+            console.log(ar2);
+
+        </script>
+    </body>
+</html>

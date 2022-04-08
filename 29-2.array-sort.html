@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+
+        <div class="info">
+            <button onclick="sortByAge()">依年齡排序</button>
+            <br>
+            <br>
+            <button onclick="sortByName()">依名字排序</button>
+            <br>
+            <br>
+            <button onclick="console.log(data)">看資料</button>
+        </div>
+
+        <script src="./js/jquery-3.6.0.min.js"></script>
+        
+        <script>
+        
+            const data = [
+                {
+                    name: "Sam",
+                    age: 48,
+                    job: "student",
+                },
+                {
+                    name: "John",
+                    age: 30,
+                    job: "teacher",
+                },
+                {
+                    name: "julie",
+                    age: 19,
+                    job: "student",
+                },
+                {
+                    name: "Mary",
+                    age: 20,
+                    job: "teacher",
+                },
+            ];
+
+            function sortByAge() {
+                data.sort(function (a, b) {
+                    return a.age - b.age;  // 年齡由小到大
+                });
+            }
+
+            function sortByName() {
+                data.sort(function (a, b) {
+                    return a.name < b.name ? -1 : 1;  
+                    // 字母由小到大 小寫字母會在後面
+                
+                });
+            }
+
+        </script>
+    </body>
+</html>

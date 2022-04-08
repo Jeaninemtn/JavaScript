@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>object-key</title>
+    </head>
+    <body>
+        <div class="info">1</div>
+
+        <script src="./js/jquery-3.6.0.min.js"></script>
+        <script>
+            const n = "gender";
+
+            const p1 = {
+                name: "Julie",
+                age: 30,
+                [n]: "Female",
+            };
+            console.log(p1);
+
+            const a = { v: 1 };
+            const b = { v: 2 };
+
+            p1[a] = 100; // p1['[object Object]']
+            p1[b] = 300;
+
+            console.log(p1[a]); // 會拿到什麼?
+            console.log(p1[b]);
+        </script>
+    </body>
+</html>
