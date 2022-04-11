@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>function</title>
+</head>
+<body>
+    <script src="./js/jquery-3.6.0.min.js"></script>
+    <script>
+
+        // https://eyesofkids.gitbooks.io/javascript-start-from-es6/content/part4/rest_spread.html
+
+        myFunc(7, 9, 12);
+            
+            function myFunc(a, b){
+                console.log({a,b});
+                console.log(arguments); // ES5 之前的用法
+            }
+
+            const myFunc2 = function(a, b){
+                console.log({a,b});
+                console.log(arguments); // ES5 之前的用法
+            };
+            myFunc2(6, 8, 10);
+
+
+    </script>
+
+
+
+
+</body>
+</html>
