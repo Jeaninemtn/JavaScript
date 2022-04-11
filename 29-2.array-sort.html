@@ -48,6 +48,8 @@
             function sortByAge() {
                 data.sort(function (a, b) {
                     return a.age - b.age;  // 年齡由小到大
+                    // 為了比較*數字*而不是字串，比較函式可以僅僅利用 a 減 b。
+                    // 函式將會升冪排序陣列 (由小到大)
                 });
             }
 
@@ -55,6 +57,7 @@
                 data.sort(function (a, b) {
                     return a.name < b.name ? -1 : 1;  
                     // 字母由小到大 小寫字母會在後面
+                    // 問號的用途是判斷
                 
                 });
             }
