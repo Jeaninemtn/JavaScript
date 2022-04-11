@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>recursion</title>
+</head>
+
+<body>
+
+    <script src="./js/jquery-3.6.0.min.js"></script>
+    <script>
+
+        // recursion 遞迴
+
+        function 階乘(n) {
+            if (n <= 1) {
+                return 1;
+            } else {
+                return n * 階乘(n - 1);
+            }
+
+            // 三元運算子
+
+            return n <= 1 ? 1 : n * 階乘(n - 1);
+        }
+
+        console.log(階乘(6));
+
+
+    </script>
+</body>
+
+</html>

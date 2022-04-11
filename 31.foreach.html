@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>forEach</title>
+</head>
+
+<body>
+    <script src="./js/jquery-3.6.0.min.js"></script>
+    <script>
+        const data = [
+            {
+                name: 'Sam',
+                age: 38,
+                job: 'doctor',
+            },
+            {
+                name: "John",
+                age: 30,
+                job: "teacher",
+            },
+            {
+                name: "johnny",
+                age: 19,
+                job: "student",
+            },
+            {
+                name: "Mary",
+                age: 20,
+                job: "teacher",
+            },
+        ];
+
+            // https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach
+
+
+        data.forEach(function(v,i){
+            v.age ++;
+            console.log(v.name, i);
+        });
+
+
+
+    </script>
+</body>
+
+</html>
