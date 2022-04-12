@@ -68,9 +68,9 @@
         const showClock = () => {
             const now = new Date();
             const ss = now.getSeconds();
-            sec_hand
+            sec_hand.css('transform', `rotate(${ss*6}deg)`);
 
-            // setTimeout(showClock, 1000);
+            setTimeout(showClock, 1000);
         }
         showClock();
 
