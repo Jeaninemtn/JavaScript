@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+
+        <script src="./js/jquery-3.6.0.min.js"></script>
+        <script>
+            
+            console.log(new Date());
+            console.log(new Date);
+            console.log(new Date(2022, 0, 12));
+            console.log(new Date(2022, 0, 12, 10, 39, 1));
+            console.log(new Date('2022-04-12'));
+            console.log(new Date('2022-04-12 08:06:20'));
+            const now = new Date;
+
+            console.log(now.getFullYear()); // 哪一年
+            console.log(now.getMonth());  // 幾月
+            console.log(now.getDay()); // 星期幾
+            console.log(now.getDate()); // 幾號
+            console.log(now.getTime()); // 從1970年算起
+
+            // 可以算時間差
+
+            const tt = (new Date('2022-06-07')) - Date.now();
+            console.log(tt/86400000);
+            
+            // 一天有 24*60*60*1000=86400000 毫秒
+
+            const dd = new Date();
+            dd.setDate(1);
+            console.log(dd.getDay()); // 當月的一號是星期幾
+
+        </script>
+    </body>
+</html>

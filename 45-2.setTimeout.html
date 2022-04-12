@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>setTimeout</title>
+</head>
+
+<body>
+    <script src="./js/jquery-3.6.0.min.js"></script>
+    <script>
+        let n = 0;
+
+        for (var i = 0; i < 8; i++) {
+            setTimeout(function () {
+                console.log(i, n++);
+            }, 500 * i);
+        }
+
+        for (let k = 0; k < 8; k++) {
+            setTimeout(function () {
+                console.log({ k });
+            }, 500 * k);
+        }
+
+    </script>
+</body>
+
+</html>

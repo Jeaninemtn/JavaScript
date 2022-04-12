@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>clock</title>
+    <style>
+        .clock {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background-color: #afa;
+
+        }
+
+        .hand {
+            position: absolute;
+            top: 100px;
+            left: 100px;
+        }
+
+        .hand-sec {
+            position: absolute;
+            width: 5px;
+            height: 100px;
+            background-color: #ffa;
+            top: -100px;
+            left: -3px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="clock">
+        <div class="hand" id="sec-hand">
+            <div class="hand-sec"></div>
+        </div>
+    </div>
+
+    <script src="./js/jquery-3.6.0.min.js"></script>
+
+    <script>
+        const clock = $('.clock');
+        const sec_hand = $('#sec-hand');
+
+        // sec_hand.css('transform', 'rotate(30deg)');
+
+        const showClock = () => {
+            const now = new Date();
+            const ss = now.getSeconds();
+            sec_hand.css('transform', `rotate(${ss*6}deg)`);
+
+            setTimeout(showClock, 1000);
+        }
+        showClock();
+
+    </script>
+</body>
+
+</html>
