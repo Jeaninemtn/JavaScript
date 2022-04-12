@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>clock</title>
     <style>
-
         /* 用transition + getSeconds去寫 */
 
         .clock {
@@ -23,7 +22,7 @@
             position: absolute;
             top: 100px;
             left: 100px;
-            transition: 1s;
+            transition: 2s;
             /* 跑完60秒會有bug */
         }
 
@@ -35,7 +34,6 @@
             top: -100px;
             left: -3px;
         }
-
     </style>
 </head>
 
@@ -56,7 +54,14 @@
         const showClock = () => {
             const now = new Date();
             const ss = now.getSeconds();
-            sec_hand.css('transform', `rotate(${ss*6}deg)`);
+
+            for (let ss = 0; ss <= 59; ss++) {    
+                console.log(ss);
+            }
+
+            if (ss = 0) {
+                sec_hand.css('transform', `rotate(0}deg)`)
+            }
 
             setTimeout(showClock, 1000);
         }
