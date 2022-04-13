@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>clock animation</title>
+    <style>
+
+        /* 時鐘刻度 + 動畫 + 按鈕執行 */
+
+        body {
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+
+        .rect {
+            position: relative;
+            width: 800px;
+            height: 600px;
+            background-color: #aff;
+        }
+
+        .big-btn {
+                position: absolute;
+                width: 70px;
+                height: 70px;
+                border-radius: 50%;
+                background-color: #ffa;
+                color: rgb(52, 123, 123);
+                font-weight: 700;
+                text-align: center;
+                line-height: 70px;
+                left: 365px;
+                top: 265px;
+                cursor: pointer;
+            }
+
+        .ball {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #faa;
+            color: #ffa;
+            font-weight: 700;
+            text-align: center;
+            line-height: 50px;
+            transition: 1s;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="rect">
+        <div class="big-btn" onclick="toggleMenu()">Click</div>
+    </div>
+
+    <script src="./js/jquery-3.6.0.min.js"></script>
+    <script>
+        const rect = $(".rect");
+        const bigBtn = $(".big-btn");
+
+        const ballNum = 12;
+        const unitAng = Math.PI * 2 / ballNum;
+        const balls = [];
+        let isOpened = false;  // 一開始選單是收起來的
+
+        for (let i = 0; i < ballNum; i++) {
+            const b = $(`<div class="ball">${i + 1}</div>`);
+            // 做球
+            b.css({ left: 375, top: 275 });
+            // 把球球們放在中央同一個位置
+            balls.push({
+                el: b,
+                bx: 375,
+                by: 275,
+                ex: 400 - 25 + 250 * Math.cos(unitAng * i),
+                ey: 300 - 25 + 250 * Math.sin(unitAng * i),
+            }); // 放到陣列裡
+            rect.append(b);
+            // 輸出球球到父層裡
+        }
+        rect.append(bigBtn);
+
+        // 直接把按鈕疊加在最上層 這樣就不用使用z-index
+
+        const toggleMenu = () => {
+            isOpened = !isOpened
+
+            // ! is used to reverse boolean value
+
+            // https://stackoverflow.com/questions/40306852/what-does-means-in-javascript
+
+            if (isOpened) {
+                balls.forEach((obj, i) => {
+                    setTimeout(() => {
+                        obj.el.css({ left: obj.ex, top: obj.ey })
+                    }, i * 50);
+                });
+            }
+            else {
+                balls.forEach((obj, i) => {
+                    setTimeout(() => {
+                        obj.el.css({ left: obj.bx, top: obj.by })
+                    }, (11 - i) * 50);
+                });
+            }
+
+        };
+
+        // http://vanilla-js.com/ 假JS框架喇 就是原生JS而已 -.-
+
+    </script>
+
+
+</body>
+
+</html>
