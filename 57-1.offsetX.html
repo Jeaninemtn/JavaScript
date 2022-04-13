@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>offsetX</title>
+        <style>
+
+            /* 滑動就會跑出球球 */
+
+            .rect {
+                position: relative;
+                width: 800px;
+                height: 600px;
+                background-color: #faf;
+            }
+
+            .ball {
+                position: absolute;
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+                background-color: #ffa;
+                pointer-events: none;
+                /* 加上這個會感應不到滑鼠事件 */
+                /* 球球才可以重疊 不會亂跑 */
+            }
+        </style>
+    </head>
+    <body>
+        <div class="rect"></div>
+
+        <script src="./js/jquery-3.6.0.min.js"></script>
+        <script>
+            const rect = document.querySelector('.rect');
+
+            const h = event=>{
+                const b = document.createElement('div');
+                b.className = 'ball';
+                b.style.left = `${event.offsetX-10}px`;
+                b.style.top = `${event.offsetY-10}px`;
+                rect.append(b);
+            };
+
+            rect.addEventListener('mousemove', h);
+            
+        </script>
+    </body>
+</html>

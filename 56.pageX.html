@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pageX</title>
+    <style>
+        .rect1 {
+            position: relative;
+            width: 800px;
+            height: 600px;
+            background-color: rgb(153, 199, 245);
+        }
+
+        .rect2 {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background-color: rgb(119, 232, 119);
+            left: 50px;
+            top: 50px;
+        }
+
+        .ball {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: rgb(215, 241, 66);
+            color: white;
+            font-weight: 600;
+            text-align: center;
+            line-height: 50px;
+            left: 50px;
+            top: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="rect1">
+        <div class="rect2">
+            <div class="ball"></div>
+        </div>
+    </div>
+    <div id="info"></div>
+
+    <script src="./js/jquery-3.6.0.min.js"></script>
+    <script>
+        const rect1 = document.querySelector('.rect1');
+        const rect2 = document.querySelector('.rect2');
+        const ball = document.querySelector('.ball');
+
+        const h = event => {
+            info.innerHTML = `
+                ${event.pageX}, ${event.pageY}<br>
+                ${event.clientX}, ${event.clientY}<br>
+                ${event.offsetX}, ${event.offsetY}<br>
+                `
+        };
+
+        rect1.addEventListener('mousemove', h);
+
+
+    </script>
+
+</body>
+
+</html>
