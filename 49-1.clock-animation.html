@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>clock animation</title>
+    <style>
+        /* 時鐘刻度 + 動畫 一起散開 */
+
+        body {
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+
+        .rect {
+            position: relative;
+            width: 800px;
+            height: 600px;
+            background-color: #aff;
+        }
+
+        .ball {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #faa;
+            color: #ffa;
+            font-weight: 700;
+            text-align: center;
+            line-height: 50px;
+            transition: 1s;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="rect"></div>
+
+    <script src="./js/jquery-3.6.0.min.js"></script>
+    <script>
+
+        const rect = $('.rect');
+
+        const ballNum = 12;
+        const unitAng = Math.PI * 2 / ballNum;
+        const balls = [];
+
+        for (let i = 0; i < ballNum; i++) {
+            const b = $(`<div class="ball">${i + 1}</div>`);
+            b.css({ left: 375, top: 275 });
+            // 把球球放在中心位置 (width/2)-球球半徑25 = 375
+            // 把球球放在中心位置 (height/2)-球球半徑25 = 275
+            balls.push(b); // 放到陣列裡
+            rect.append(b);
+        }
+
+        setTimeout(() => {
+            balls.forEach((v, i) => {
+                // 箭頭函式
+                // v=value  i=index
+                console.log(v);
+                console.log(i);
+                const x = 400 - 25 + 250 * Math.cos(unitAng * i);
+                const y = 300 - 25 + 250 * Math.sin(unitAng * i);
+                v.css({ left: x, top: y });
+            });
+        }, 2000);
+
+
+
+    </script>
+
+
+</body>
+
+</html>
