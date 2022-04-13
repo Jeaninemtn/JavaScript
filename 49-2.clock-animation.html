@@ -5,8 +5,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>clock</title>
+    <title>clock animation</title>
     <style>
+        
         /* 時鐘刻度 + 動畫 個別散開 */
 
         body {
@@ -56,8 +57,8 @@
             rect.append(b);
         }
 
-
         balls.forEach((v, i) => {
+            // forEach() 方法會將陣列內的每個元素，皆傳入並執行給定的函式一次
             // 箭頭函式
             // v=value  i=index
             setTimeout(() => {
@@ -67,7 +68,6 @@
                 v.css({ left: x, top: y });
             }, i * 50);
         });
-
 
     </script>
 
