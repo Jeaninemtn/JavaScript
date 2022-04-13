@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>event target</title>
+    <style>
+        body {
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+
+        .rect {
+            position: relative;
+            width: 800px;
+            height: 600px;
+            background-color: #aff;
+        }
+
+        /* .big-btn {
+            position: absolute;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background-color: #ffa;
+            color: rgb(52, 123, 123);
+            font-weight: 700;
+            text-align: center;
+            line-height: 70px;
+            left: 365px;
+            top: 265px;
+            cursor: pointer;
+        } */
+
+        .ball {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #faa;
+            color: #ffa;
+            font-weight: 700;
+            text-align: center;
+            line-height: 50px;
+            transition: 1s;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="rect">
+        <!-- <div class="big-btn" onclick="toggleMenu()">Click</div> -->
+    </div>
+
+    <script src="./js/jquery-3.6.0.min.js"></script>
+    <script>
+        const rect = $(".rect");
+
+        const ballNum = 12;
+        const unitAng = Math.PI * 2 / ballNum;
+
+        for (let i = 0; i < ballNum; i++) {
+            const b = $(`<div class="ball">${i + 1}</div>`);
+            const x = 400 - 25 + 250 * Math.cos(-Math.PI / 3 + unitAng * i);
+            const y = 300 - 25 + 250 * Math.sin(-Math.PI / 3 + unitAng * i);
+            b.css({ left: x, top: y });
+
+            rect.append(b);
+        }
+
+        rect[0].addEventListener('click', event => {
+            console.log(event.target, event.currentTarget);
+            // event.target 點到的最裡面的 element
+            // event.currentTarget 註冊事件處理器的對象
+        });
+
+        rect[0].append(document.createElement('div'));
+        rect[0].appendChild(document.createElement('div'));
+
+        // https://developer.mozilla.org/zh-TW/docs/Web/API/Element
+
+    </script>
+
+</body>
+
+</html>
