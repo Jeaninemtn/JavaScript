@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>clock</title>
+    <style>
+
+        /* 完整ㄉ時鐘 秒針(等速移動) 分針 時針 */
+
+        .clock {
+            position: relative;
+            width: 600px;
+            height: 600px;
+            background-color: #ffa;
+            border-radius: 50%;
+        }
+
+        .hand {
+            position: absolute;
+            left: 300px;
+            top: 300px;
+        }
+
+        .hand-sec {
+            position: absolute;
+            width: 2px;
+            height: 280px;
+            background-color: #aaf;
+            left: -1px;
+            top: -280px;
+        }
+
+        .hand-min {
+            position: absolute;
+            width: 10px;
+            height: 220px;
+            background-color: #faf;
+            left: -5px;
+            top: -220px;
+        }
+
+        .hand-hr {
+            position: absolute;
+            width: 20px;
+            height: 160px;
+            background-color: #afa;
+            left: -10px;
+            top: -160px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="clock">
+        <!-- 秒針 -->
+        <div class="hand" id="sec-hand">
+            <div class="hand-sec"></div>
+        </div>
+        <!-- 分針 -->
+        <div class="hand" id="min-hand">
+            <div class="hand-min"></div>
+        </div>
+        <!-- 時針 -->
+        <div class="hand" id="hr-hand">
+            <div class="hand-hr"></div>
+        </div>
+    </div>
+
+    <script src="./js/jquery-3.6.0.min.js"></script>
+    <script>
+        const clock = $('.clock');
+        const sec_hand = $('#sec-hand');
+        const min_hand = $('#min-hand');
+        const hr_hand = $('#hr-hand');
+
+        const showClock = () => {
+            const now = new Date();
+            const ms = now.getMilliseconds();
+            const ss = now.getSeconds();
+            const mm = now.getMinutes();
+            const hh = now.getHours();
+            sec_hand.css('transform', `rotate(${ss * 6 + 6/1000*ms}deg)`);
+            min_hand.css('transform', `rotate(${mm * 6}deg)`);
+            hr_hand.css('transform', `rotate(${hh * 30 + mm*0.5}deg)`);
+
+            setTimeout(showClock, 30);
+        }
+        showClock();
+    </script>
+
+</body>
+
+</html>
