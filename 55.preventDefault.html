@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>preventDefault</title>
+
+    </head>
+    <body>
+        <a href="https://tw.yahoo.com" onclick="myClick(event)">yahoo</a>
+        <a href="https://www.pchome.com.tw/" onclick="confirm('Are you going to pchome?')">pchome</a>
+        <!-- 老師有加 return 可是如果我加上會有bug -->
+        <a href="javascript: myClick2()" >fake</a>
+
+        <script src="./js/jquery-3.6.0.min.js"></script>
+
+        <script>
+            function myClick(event){
+                console.log('hello', this);
+                if(! confirm('You are leaving this page?')){
+                    event.preventDefault();
+                }
+            }
+            function myClick2(){
+                console.log('hellooo')
+            }
+
+        </script>
+    </body>
+</html>
