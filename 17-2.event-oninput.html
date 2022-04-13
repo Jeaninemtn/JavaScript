@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>event oninput</title>
+</head>
+
+<body>
+
+    <!-- From W3C -->
+    <!-- https://www.w3schools.com/jsref/event_oninput.asp -->
+
+    <p>Write something in the text field to trigger a function.</p>
+
+    <input type="text" id="myInput" oninput="myFunction()">
+
+    <p id="demo"></p>
+
+    <script>
+        function myFunction() {
+            const x = document.getElementById('myInput').value;
+            document.getElementById('demo').innerHTML = 'I wrote:' + x;
+        }
+    </script>
+
+</body>
+
+</html>

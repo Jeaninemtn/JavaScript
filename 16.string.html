@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>string slice and split</title>
 </head>
 <body>
     <div class="abc">1</div>
@@ -16,8 +16,17 @@
         console.log(str.length);
         console.log(str.slice(5, 10));
         console.log(str.split('Hello'));
+        
+        // split = 把字串分割產生陣列
+        // ['中文字 ', ' David 中 David2']
+        
         console.log(str.split(''));
+
+        // ['中', '文', '字', ' ', 'H', 'e', 'l', 'l', 'o', ' ', 'D', 'a', 'v', 'i', 'd', ' ', '中', ' ', 'D', 'a', 'v', 'i', 'd', '2']
+
         console.log(str.split('David').join('Flora')); // 字串取代
+
+        // split把David拿掉 join放入Flora
 
     </script>
 </body>

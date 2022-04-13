@@ -13,15 +13,18 @@
     <script>
         let str = '中文字 Hello David \u4E2D David2';
 
-        console.log(str.length);
+        console.log(str.length); // 24
         console.log(str.charAt(0)); // 第一個字元
         console.log(str[0]); // 第一個字元
         console.log(str.charCodeAt(0)); // 第一個字元的字碼
+        
+        console.log(str.includes('Dav'));  // 有沒有包含 // NEW!!
+        console.log(str.indexOf('DAV')); // -1 bc it is not found
+
         console.log(str.indexOf('Dav'));
         console.log(str.indexOf('Dav', 11));
-        console.log(str.includes('Dav'));  // 有沒有包含 // NEW!!
-        console.log(str.indexOf('DAV'));
         console.log(str.lastIndexOf('Dav'));
+
         console.log(String.fromCharCode(20013));
 
     </script>

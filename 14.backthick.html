@@ -13,16 +13,21 @@
     <script>
         let name = 'David';
         const els = document.querySelectorAll('.abc');
+        console.log(els);
 
-        const str = `<h1>Hello ${ name }</h1>`; // 字串樣版
+        const str1 = `<h1>Hello ${ name }</h1>`; // 字串樣版
 
         // 反引號 `` 可以換行繼續寫 單引號及雙引號不可以
 
-        els[0].innerHTML = str;
+        console.log(str1);
+
+        els[0].innerHTML = str1;
 
         // 可以看到HTML標籤
 
-        const str2 = "John\"s \n dog";
+        const str2 = "John\'s \n dog";
+
+        console.log(str2);
 
         els[1].innerText = str2;
 
