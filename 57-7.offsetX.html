@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>offsetX</title>
+    <style>
+
+        /* 改球球速度&調整滑鼠事件 */
+
+        .rect {
+            position: relative;
+            width: 800px;
+            height: 600px;
+            background-color: #faf;
+        }
+
+        .ball {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            /* background-color: #ffa; */
+            pointer-events: none;
+            /* 加上這個會感應不到滑鼠事件 */
+            /* 球球才可以重疊 不會亂跑 */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="rect"></div>
+
+    <script src="./js/jquery-3.6.0.min.js"></script>
+    <script>
+        const rect = document.querySelector('.rect');
+        let mx, my; // 滑鼠位置
+        let isDrawing = false; // 是否正在畫
+
+        const randomRGB = () => {
+            const c = Math.floor(0xFFFFFF * Math.random());
+            const s = '0000000' + c.toString(16);
+            return '#' + s.slice(s.length - 6);
+        }
+
+        const createBall = (event = {}) => {
+            const size = 10 + Math.floor(Math.random() * 21); // 決定大小
+            const x = event.offsetX ? (event.offsetX - size / 2) : 0;
+            const y = event.offsetY ? (event.offsetY - size / 2) : 0;
+            // const c = `hsl(${Math.floor(Math.random()*360)},100%,50%)`
+            const c = randomRGB();
+
+            const b = document.createElement('div');
+            b.className = 'ball';
+            b.style.left = `${x}px`;
+            b.style.top = `${y}px`;
+            b.style.height = `${size}px`;
+            b.style.width = `${size}px`;
+            b.style.backgroundColor = c;
+            return b;
+        }
+
+        const h = event => {
+            //rect.append(createBall(event));
+        };
+
+        rect.addEventListener('mousedown', event => {
+            isDrawing = true;
+        });
+
+        window.addEventListener('mouseup', event => {
+            isDrawing = false;
+        });
+        rect.addEventListener('mousemove', event => {
+            mx = event.offsetX;
+            my = event.offsetY;
+        });
+
+        const drawBall = () => {
+            if (isDrawing) {
+                rect.append(createBall({ offsetX: mx, offsetY: my }));
+            }
+            setTimeout(drawBall, 60);
+        }
+        drawBall();
+    </script>
+</body>
+
+</html>
