@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>form</title>
+    <link rel="stylesheet" href="./bootstrap/css/bootstrap.css">
+    <style>
+
+      input {
+        display: block;
+      }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+              <form name="form1" onsubmit="formCheck(); false" novalidate>
+
+                <!-- https://api.jquery.com/serialize/ -->
+                <!-- https://developer.mozilla.org/zh-TW/docs/Web/API/Event/preventDefault -->
+
+                  <input type="text" name="i1">
+                  <input type="email" name="i2" placeholder="Email">
+                  <input type="hidden" name="i3" value="user">
+                  <input type="color" name="i4">
+                  <input type="date" name="i5">
+                  <input type="datetime" name="i6">
+                  <input type="datetime-local" name="i7">
+                  <input type="number" name="i8" min="10" max="100" step="5">      
+                  <input type="submit">          
+               </form>
+            </div>
+        </div>
+    </div>
+    <script src="./js/jquery-3.6.0.min.js"></script>
+   
+    <script>
+
+      function formCheck() {
+        const data1 = $(document.form1).serialize();
+        const data2 = $(document.form1).serializeArray();
+        console.log(data1);
+        console.log(data2);
+      }
+
+    </script>
+
+</body>
+</html>
