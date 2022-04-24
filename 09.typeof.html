@@ -27,8 +27,8 @@
 
         const abc = document.querySelectorAll('.abc');
         console.log(abc);
-        console.log(typeof abc);
-        console.log(abc.constructor.name);
+        console.log(typeof abc); // 只能得到object 複雜物件無法用typeof得知類型
+        console.log(abc.constructor.name); // 複雜物件用.constructor.name // NodeList
 
 
     </script>
