@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+            .rect {
+                position: relative;
+                width: 800px;
+                height: 600px;
+                border: 1px solid black;
+                background-color: rgb(207, 228, 249);
+            }
+
+            .ball {
+                position: absolute;
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+                border: 1px solid black;
+                background-color: rgb(252, 80, 46);
+                pointer-events: none;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="rect"></div>
+
+        <script src="js/jquery-3.6.0.js"></script>
+        <script>
+            const rect = document.querySelector(".rect");
+            let mx, my; // 滑鼠位置
+            let isDrawing = false; // 是否正在畫
+            const data = [];
+
+            const randomRGB = () => {
+                const c = Math.floor(0xffffff * Math.random());
+                const s = "0000000" + c.toString(16);
+                return "#" + s.slice(s.length - 6);
+            };
+
+            const createBall = (event = {}) => {
+                const size = 10 + Math.floor(Math.random() * 21); // 決定大小
+                const x = event.offsetX ? event.offsetX - size / 2 : 0;
+                const y = event.offsetY ? event.offsetY - size / 2 : 0;
+                // const c = `hsl(${Math.floor(Math.random()*360)},100%,50%)`
+                const c = randomRGB();
+
+                data.push({
+                    s: size,
+                    x,
+                    y,
+                    c,
+                });
+
+                const b = document.createElement("div");
+                b.className = "ball";
+                b.style.left = `${x}px`;
+                b.style.top = `${y}px`;
+                b.style.height = `${size}px`;
+                b.style.width = `${size}px`;
+                b.style.backgroundColor = c;
+                return b;
+            };
+
+            rect.addEventListener("mousedown", (event) => {
+                isDrawing = true;
+            });
+
+            window.addEventListener("mouseup", (event) => {
+                isDrawing = false;
+            });
+            rect.addEventListener("mousemove", (event) => {
+                mx = event.offsetX;
+                my = event.offsetY;
+            });
+
+            const drawBall = () => {
+                if (isDrawing) {
+                    rect.append(createBall({ offsetX: mx, offsetY: my }));
+
+                    localStorage.setItem("myDraw", JSON.stringify(data));
+                }
+                setTimeout(drawBall, 60);
+            };
+            drawBall();
+        </script>
+    </body>
+</html>
