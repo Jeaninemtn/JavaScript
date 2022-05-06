@@ -46,11 +46,16 @@
             for (let k = 0; k < 9; k++, n++) {
                 if (n === 39) {
                     // n 改成其他數字看看 > = 
-                    // break; 
+                    break; 
                     // break直接跳出迴圈
-                    continue; 
+                    // continue; 
                     // 略過continue以下程式 繼續執行下一輪迴圈
                 }
+
+                // https://www.w3schools.com/js/js_break.asp
+
+                // break and continue
+
                 const div = $(`<div class="ball">${n}</div>`);
                 div.css({
                     left: 50 + k * 60,
