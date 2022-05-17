@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>date</title>
+
+        <!-- 打卡 -->
+
+        <style>
+
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            .container {
+                width: 80%;
+                height: 100vh;
+                margin: 0 auto;
+                background-color: rgb(202, 202, 255);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .container>div {
+                text-align: center;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div>
+                <h2>打卡時間</h2>
+                <h3 id="timeNow"></h3>
+            </div>
+        </div>
+
+        <!-- https://momentjs.com/ -->
+        <!-- https://day.js.org/ -->
+        <!-- https://www.timeanddate.com/time/map/ -->
+
+        <script src="./js/jquery-3.6.0.min.js"></script>
+        <script src="./js/moment-with-locales.js"></script>
+        <script src="./js/moment-timezone-with-data.js"></script>
+        <script>
+            
+            console.log(moment());
+
+            const mo = moment();
+            const format = 'YYYY-MM-DD HH:mm:ss';
+
+            timeNow.innerHTML = mo.format(format);
+
+        </script>
+    </body>
+</html>
