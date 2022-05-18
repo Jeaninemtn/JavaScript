@@ -22,28 +22,39 @@
 
     <div class="container">
             <button onclick="subFunction()">-</button>
-            <input type="text" value="1" id="quantity">
+            <input type="text" id="quantity" value="1">
             <button onclick="addFunction()">+</button>
     </div>
 
 
     <script>
 
-        let q = document.getElementById('quantity').value;
-        ('#quantity').addEventListener('change', subFunction);
-        console.log('hello q', q);
+        let q = document.getElementById('quantity');
 
-        function subFunction() {
-            document.getElementById('quantity').value = q;
-            if (q > 1) {
-                q--;
-            }
+        document.getElementById('quantity').addEventListener('change', myFunction);
+
+        function myFunction() {
+            console.log(q.value);
         }
 
+        // let i = q.value;
+        // console.log('i', i);
+
+        // function addFunction() {
+        //     i ++;
+        // };
+
         function addFunction() {
-            q++;
-            document.getElementById('quantity').value = q;
+                q.value ++;
         };
+
+        function subFunction() {
+                if (q.value > 1) {
+                    q.value --;
+                }
+        };
+
+        // 偵測input的值改變
 
     </script>
 </body>

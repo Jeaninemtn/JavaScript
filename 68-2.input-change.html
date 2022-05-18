@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-content: center;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+            <button onclick="subFunction()">-</button>
+            <input type="text" id="quantity">
+            <button onclick="addFunction()">+</button>
+    </div>
+
+
+    <script>
+
+        const input = document.querySelector('input');
+        // console.log('input', input);
+        const q = document.getElementById('quantity');
+        // console.log('q', q);
+
+        input.addEventListener('change', updateValue);
+
+        function updateValue() {
+            console.log(q.value);
+        }
+
+        // 偵測input的值改變
+
+    </script>
+</body>
+
+</html>
