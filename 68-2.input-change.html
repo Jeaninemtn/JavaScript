@@ -13,7 +13,6 @@
             justify-content: center;
             align-content: center;
         }
-
     </style>
 
 </head>
@@ -21,9 +20,9 @@
 <body>
 
     <div class="container">
-            <button onclick="subFunction()">-</button>
-            <input type="text" id="quantity">
-            <button onclick="addFunction()">+</button>
+        <button onclick="subFunction()">-</button>
+        <input type="text" id="quantity">
+        <button onclick="addFunction()">+</button>
     </div>
 
 
@@ -41,6 +40,10 @@
         }
 
         // 偵測input的值改變
+
+        // https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/change_event
+
+        // the change event is not necessarily fired for each alteration to an element's value 並不是每個change都會被觸發
 
     </script>
 </body>
