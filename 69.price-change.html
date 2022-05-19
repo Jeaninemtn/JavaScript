@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div>
+            <button onclick="subFunction()">-</button>
+            <input type="text" value="1" id="quantity">
+            <button onclick="addFunction()">+</button>
+        </div>
+        <span>NTD<span id="subTotalPrice" value>840</span></span>
+    </div>
+
+    <script>
+
+        // 數量改變總體金額也要變
+
+        // https://stackoverflow.com/questions/47426929/javascript-adjust-price-when-changing-quantity
+
+
+        var singlePrice = '840';
+        var subTotalPrice = `<h4>${singlePrice * q}</h4>`;
+        document.getElementById('subTotalPrice').innerHTML = subTotalPrice;
+
+        function addFunction() {
+            var q = parseInt(document.getElementById('quantity').value);
+            q = isNaN(q) ? 0 : q;
+            q++;
+            document.getElementById('quantity').value = q;
+            subTotalPrice = `<span>${singlePrice * q}</span>`;
+            document.getElementById('subTotalPrice').innerHTML = subTotalPrice;
+        };
+
+        function subFunction() {
+            var q = parseInt(document.getElementById('quantity').value);
+            q = isNaN(q) ? 0 : q;
+            if (q > 1) {
+                q--;
+                document.getElementById('quantity').value = q;
+                subTotalPrice = `<span>${singlePrice * q}</span>`;
+                document.getElementById('subTotalPrice').innerHTML = subTotalPrice;
+            }
+        };
+    </script>
+</body>
+
+</html>
