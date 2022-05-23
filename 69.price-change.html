@@ -37,7 +37,6 @@
         var singlePrice = '840';
         var subTotalPrice = `<h4>${singlePrice * q}</h4>`;
         document.getElementById('subTotalPrice').innerHTML = subTotalPrice;
-
         function addFunction() {
             var q = parseInt(document.getElementById('quantity').value);
             q = isNaN(q) ? 0 : q;
