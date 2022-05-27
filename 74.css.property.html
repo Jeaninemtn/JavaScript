@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- https://bobbyhadz.com/blog/javascript-check-if-style-contains-css-property#:~:text=To%20check%20if%20an%20element's,backgroundColor)%20%7B%7D%20. -->
+
+    <style>
+
+        .container {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        #box {
+            width: 150px;
+            height: 150px;
+            background-color: salmon;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div id="box">Hello world</div>
+    </div>
+
+    <script>
+        const box = document.getElementById('box');
+
+        // ✅ Check if CSS property is contained in Style
+        if (box.style.backgroundColor) {
+            console.log('value is', box.style.backgroundColor);
+        } else {
+            console.log('CSS property is not contained in style');
+        }
+
+        // ✅ Remove property from style
+        box.style.removeProperty('background-color');
+
+        // ✅ Add property to style
+        box.style.setProperty('background-color', 'lime');
+        
+    </script>
+</body>
+
+</html>
