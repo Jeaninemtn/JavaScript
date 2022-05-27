@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            height: 100vh;
+            background-color: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        button {
+            font-size: 2rem;
+            color: #ffa;
+            padding: 10px 15px;
+            border-radius: 10px;
+            border: 2px solid #ffa;
+            background-color: #000;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <button class="filter" id="a">Movie</button>
+        <button class="filter" id="b">Drama</button>
+        <button class="filter" id="c">Animate</button>
+    </div>
+
+    <script>
+
+        var cate = [
+            "movie",
+            "drama",
+            "animate"
+        ];
+
+        console.log(cate);
+        console.log(typeof cate);  // 物件
+        console.log(cate.includes("Movie"));  // includes() 回傳布林值
+
+        if(cate.includes("movie") == true) {
+            document.querySelector(".filter").style.border = "2px solid green";
+            document.querySelector(".filter").style.color = "green";
+        }
+        
+        // TODO: 為什麼不能寫querySelectorAll
+        
+
+    </script>
+</body>
+
+</html>
