@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <button onclick="twoSum()">click</button>
+
+    <script>
+
+        // nums = [2,7,11,15], target = 9
+
+        function twoSum(nums, target) {
+            nums = [2, 7, 11, 15];
+            target = 9;
+            for (let i = 0; i < nums.length; i++) {
+                for (j = i + 1; j < nums.length; j++) {
+                    if (nums[i] + nums[j] == target) {
+                        console.log(i, j);
+                        // return [i, j];
+                    }
+                }
+            }
+        };
+
+
+    </script>
+</body>
+
+</html>
