@@ -6,6 +6,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>classlist</title>
+  <style>
+    .myStyle {
+      background-color: coral;
+      padding: 16px;
+    }
+  </style>
 </head>
 
 <body>
@@ -18,10 +24,11 @@
   <script>
     function myFunction() {
       const list = document.getElementById("myDIV").classList;
+      list.add('myStyle');
       document.getElementById("demo").innerHTML = list;
     }
   </script>
-  
+
 </body>
 
 </html>
