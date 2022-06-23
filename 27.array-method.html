@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <div class="info">1</div>
+
+        <script src="./js/jquery-3.6.0.min.js"></script>
+        <script>
+        
+            const ar = [2, 4, 6, 8];
+
+            console.log("toString:", ar.toString());  
+            // 把陣列轉換為字串 中間逗點隔開
+            console.log("join:", ar.join(" - "));  // 印出 2 - 4 - 6 - 8
+            // 也是把陣列轉換為字串 但可以指定用什麼間隔
+            // 可以有空白
+
+            // ------------------------------------------
+
+            // Popping items out of an array, or pushing items into an array.
+
+            console.log(ar.push(17, 21));  // 從最後加入 // 印出 6
+            console.log(ar.push());  // 印出 6
+            console.log("push in:", ar.toString()); 
+
+            console.log(ar.pop());  // 從最後面移出
+            console.log("pop out:", ar.toString());
+
+            // ------------------------------------------
+
+            console.log(ar.shift());  // 取出第一個
+            console.log("shift:", ar.toString());
+            
+            console.log(ar.unshift(90));  // 從前面加入
+            console.log("unshift:", ar.toString());
+        
+        </script>
+    </body>
+</html>

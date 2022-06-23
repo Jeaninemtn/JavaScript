@@ -1,35 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>array method</title>
-    </head>
-    <body>
-        <div class="info">1</div>
 
-        <script src="./js/jquery-3.6.0.min.js"></script>
-        <script>
-            const ar1 = [2, 4, 6, 8];
-            const ar2 = [1, 3, 5, 7, 9];
-            const ar3 = ar1.concat(ar2); // 淺層copy 得到ar1 + ar2
-            const ar4 = ar1.concat(); // 淺層copy 複製ar1
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>array method</title>
+</head>
 
-            console.log({ ar3 });
-            console.log({ ar4 });
+<body>
+    <div class="info">1</div>
 
-            console.log(ar3.indexOf(5));
-            console.log(ar3.indexOf("5")); // 找不到 所以會拿到-1
-            console.log(ar3.toString());
-            console.log(ar3.join());
-            console.log(ar3.join("---"));
-            console.log(ar3.slice(3, 6)); // 淺層copy 索引3-6
-            console.log(ar3.slice()); // copy全部索引
-            console.log(ar3.slice(3)); // copy索引3到最後
+    <script src="./js/jquery-3.6.0.min.js"></script>
+    <script>
 
-            // https://medium.com/andy-blog/%E9%97%9C%E6%96%BCjs%E4%B8%AD%E7%9A%84%E6%B7%BA%E6%8B%B7%E8%B2%9D-shallow-copy-%E4%BB%A5%E5%8F%8A%E6%B7%B1%E6%8B%B7%E8%B2%9D-deep-copy-5f5bbe96c122
-            
-        </script>
-    </body>
+        const ar1 = [2, 4, 6, 8];
+        const ar2 = [1, 3, 5, 7, 9];
+        const ar3 = ar1.concat(ar2); // 淺層copy 得到ar1 + ar2
+        const ar4 = ar1.concat(); // 淺層copy 複製ar1
+
+        // The concat() method creates a new array by merging (concatenating) existing arrays 
+
+        console.log({ ar3 });  // 印出object
+        console.log({ ar4 });  // 印出object
+
+        // indexOf索引 找出目標位置(如果有重複只會找出第一個)
+        // The indexOf() method returns the position of the first occurrence of a value in a string.
+        // The indexOf() method returns -1 if the value is not found.
+
+        console.log(ar3.indexOf(5));  // 印出6
+        console.log(ar3.indexOf("5")); // 找不到 所以會拿到-1
+
+        // ------------------------------------------
+
+        console.log(ar3.toString());
+        console.log(ar3.join());
+        console.log(ar3.join("---"));
+
+        // ------------------------------------------
+
+        // The slice() method slices out a piece of an array.
+        // 取出部分陣列但不影響原有陣列
+
+        console.log(ar3.slice(3, 6)); // 淺層copy 索引3-6(不會包含6)
+        console.log(ar3.slice()); // copy全部索引
+        console.log(ar3.slice(3)); // copy索引3到最後
+
+        // The slice() method creates a new array.
+        // The slice() method does not remove any elements from the source array. 不改變原有的陣列
+
+        // ------------------------------------------
+
+        // The splice() method adds new items to an array.
+        // 新增物件進陣列
+
+        const fruits = ["Banana", "Orange", "Apple", "Mango"];
+        fruits.splice(2, 0, "Lemon", "Kiwi");
+        // fruits.splice(2, 2, "Lemon", "Kiwi");  // 比較差別
+        console.log("fruits", fruits);
+
+        // The first parameter(2) defines the position where new elements should be added(spliced in). 第一個參數決定插入位置
+
+        // The second parameter(0) defines how many elements should be removed. 第二個參數決定移除數量(從插入位置開始算)
+
+        // The rest of the parameters("Lemon", "Kiwi") define the new elements to be added.
+
+        // https://medium.com/andy-blog/%E9%97%9C%E6%96%BCjs%E4%B8%AD%E7%9A%84%E6%B7%BA%E6%8B%B7%E8%B2%9D-shallow-copy-%E4%BB%A5%E5%8F%8A%E6%B7%B1%E6%8B%B7%E8%B2%9D-deep-copy-5f5bbe96c122
+
+    </script>
+</body>
+
 </html>
