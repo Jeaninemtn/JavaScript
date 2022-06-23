@@ -46,24 +46,28 @@
         console.log(ar3.slice()); // copy全部索引
         console.log(ar3.slice(3)); // copy索引3到最後
 
+        const arrA = ["Banana", "Orange", "Lemon", "Apple", "Mango"];
+        const arrB = arrA.slice(1);
+        console.log('arrB', arrB);
+
         // The slice() method creates a new array.
         // The slice() method does not remove any elements from the source array. 不改變原有的陣列
 
         // ------------------------------------------
 
         // The splice() method adds new items to an array.
-        // 新增物件進陣列
+        // 新增物件進陣列(也可以移除)---用參數
 
         const fruits = ["Banana", "Orange", "Apple", "Mango"];
-        fruits.splice(2, 0, "Lemon", "Kiwi");
-        // fruits.splice(2, 2, "Lemon", "Kiwi");  // 比較差別
+        fruits.splice(2, 0, "Lemon", "Kiwi");  // 沒移除
+        // fruits.splice(2, 2, "Lemon", "Kiwi");  // 有移除
         console.log("fruits", fruits);
 
         // The first parameter(2) defines the position where new elements should be added(spliced in). 第一個參數決定插入位置
 
         // The second parameter(0) defines how many elements should be removed. 第二個參數決定移除數量(從插入位置開始算)
 
-        // The rest of the parameters("Lemon", "Kiwi") define the new elements to be added.
+        // The rest of the parameters("Lemon", "Kiwi") define the new elements to be added. 不一定要有～
 
         // https://medium.com/andy-blog/%E9%97%9C%E6%96%BCjs%E4%B8%AD%E7%9A%84%E6%B7%BA%E6%8B%B7%E8%B2%9D-shallow-copy-%E4%BB%A5%E5%8F%8A%E6%B7%B1%E6%8B%B7%E8%B2%9D-deep-copy-5f5bbe96c122
 
