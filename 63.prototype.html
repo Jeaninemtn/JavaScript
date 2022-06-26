@@ -11,17 +11,23 @@
 <body>
     <script src="./js/jquery-3.6.0.min.js"></script>
     <script>
-        const obj = { name: 'david', age: 20 };
 
-        console.log(obj.toString());
-        console.log('' + obj);
+        const obj = { name: 'david', age: 20 };  // object
+
+        console.log(obj.toString());  // [object object]
+        console.log('' + obj);  // [object object]
 
         Object.prototype.toString = function () {
             return JSON.stringify(this);
+            // 把JS的物件變成字串
         };
 
         console.log(obj.toString());
         console.log('' + obj);
+
+        // https://www.w3schools.com/js/js_object_prototypes.asp
+
+        
 
     </script>
 </body>

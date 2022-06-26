@@ -20,12 +20,21 @@
 
         for (let n = 1; sum < x; n += 3) {
             sum += n;
-            console.log(n , sum);  // n 跟 加總
-            console.log((n-1)/3 + 1); // 迴圈次數
+            // console.log(n , sum);  // n 跟 加總
+            // console.log((n-1)/3 + 1); // 迴圈次數
 
             countTimes.push(n);
             // console.log(countTimes);
-            console.log(countTimes.length);  // 迴圈次數
+            // console.log(countTimes.length);  // 迴圈次數
+
+            if ( sum > x ) {
+                console.log(sum - n);
+                const lastOne = countTimes[countTimes.length - 2];
+                // 因為 length - 1 會得到 n (最後一個值)
+                // 我要的是上一個 n 所以要 length - 2
+                console.log(lastOne);
+                console.log(countTimes.length - 1);
+            }
         }
 
         // ---------------------------------
@@ -39,6 +48,10 @@
             sum += n;
             // console.log(n , sum);
         }
+
+        // ---------------------------------
+
+        // https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Guide/Loops_and_iteration
 
     </script>
 </body>
