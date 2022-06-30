@@ -17,7 +17,7 @@
         function loadData() {
             const xhr = new XMLHttpRequest();
 
-            xhr.onload = function () {
+            xhr.onload = function () {  // callback function
                 // console.log(xhr.responseText);
                 const ar = JSON.parse(xhr.responseText);
                 console.log(ar);

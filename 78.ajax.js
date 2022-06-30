@@ -30,17 +30,48 @@
 
 // 非同步請求(Asynchronous request)：客戶端對伺服器端送出request之後 不需要等待結果 仍可以持續處理其他事情 甚至繼續送出其他request 待Responese傳回之後 就被融合進當下頁面或應用中
 
-function loadDoc() {
+
+function loadDoc1() {
     const xhttp = new XMLHttpRequest();  // create an XMLHttpRequest 物件
     xhttp.onload = function() {  // onload event 等頁面載入完成後就執行function(callback function)
       document.getElementById("demo").innerHTML = this.responseText;
       }
     xhttp.open("GET", "ajax_info.txt", true);  // true=非同步; false=同步
+    // 預設就是true非同步 可以省略不寫
+    // open(type of method, url, async or not)	
     xhttp.send();
   }
+
+
+// The XMLHttpRequest object is used to request data from a server
+
 
 // 四步驟
 // Create an XMLHttpRequest object  建立了一個XMLHttpRequest物件
 // Define a callback function
 // Open the XMLHttpRequest object   用open開啟一個URL
 // Send a Request to a server       用send發出request給server
+
+
+function loadDoc2() {
+    const xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        // readyState:4 = 目前狀態已完成request且response is ready
+        // status:200 = Http狀態碼200就是ok的意思
+        document.getElementById("demo").innerHTML = this.responseText;
+      }
+    };
+    xhttp.open("GET", "ajax_info.txt");
+    xhttp.send();
+  }
+
+
+// readyState 
+// 回傳物件目前的狀態
+// holds the status of the XMLHttpRequest
+
+// onreadystatechange 
+// 當readyState改變時就會觸發function 只要readyState狀態改變就會一直觸發
+// defines a callback function to be executed when the readyState changes
+
