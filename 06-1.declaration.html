@@ -15,16 +15,12 @@
     <script>
         console.log(a);
 
-        var a = 10;             // 1. 提升的功能
+        var a = 10;             // 1. 提升的功能 hoisting 可先使用變數再宣告
         console.log(window.a);  // 2. var 宣告的全域變數會變成 window 的屬性
 
         let b = 20;  // With let, you cannot use a variable before it is declared.
 
         const c = 30; // 不能再設定
-
-        // If you want a general rule: always declare variables with const.
-
-        // If you think the value of the variable can change, use let.
 
         b = 22;
 
@@ -35,6 +31,20 @@
         // 變數名稱最好有自我說明的功能
         // 變數名稱不可以數字開頭
         // 不要變數名稱用中文 (可以用但不要用)
+
+
+        // var作用範圍跟let,const不一樣
+
+        // var以function為界 在function以外讀不到值 那如果在區域(block scope) 
+        // 假設是if中宣告變數 在if外還是可以讀到var宣告的變數
+        // 如果要避免這個狀況 就可以使用let跟const
+
+        // const 宣告的是常數 而且必須給值
+        // 也不能再重複宣告變數
+
+        // If you want a general rule: always declare variables with const.
+        // If you think the value of the variable can change, use let.
+
     </script>
 </body>
 
