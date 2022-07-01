@@ -7,12 +7,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alert and Write</title>
 </head>
+<style>
+    
+    * {
+        margin: 0 auto;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    }
+
+    body {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    button {
+        width: 80px;
+        height: 30px;
+        background-color: cornsilk;
+        border: 2px solid chocolate;
+        color: chocolate;
+        border-radius: 10px;
+    }
+
+</style>
 
 <body>
-    <div>Hello</div>
 
+  
+    <button type="button" onclick="writeFunction()">click</button>
+    <div>Hello</div>
+     
     <script>
         document.write('<h2>World</h2>');
+
+        function writeFunction() {
+            document.write('BYE');
+        }
+
+        // Using document.write() after an HTML document is loaded, will delete all existing HTML 點按鈕執行writeFunction 會改變HTML檔 把其他東西刪除
+
     </script>
 
 </body>

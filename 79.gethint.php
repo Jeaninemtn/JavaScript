@@ -37,11 +37,12 @@ $q = $_REQUEST["q"];
 // request 用來收集送出表單後的資料
 
 $hint = "";
+// hint預設空字串
 
 // lookup all hints from array if $q is different from ""
 if ($q !== "") {
-  $q = strtolower($q);
-  $len = strlen($q);
+  $q = strtolower($q);  // Make a string lowercase
+  $len = strlen($q);  // Get string length
   foreach ($a as $name) {
     if (stristr($q, substr($name, 0, $len))) {
       if ($hint === "") {
