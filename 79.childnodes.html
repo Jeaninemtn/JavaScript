@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>childnodes</title>
+</head>
+
+<!-- https://www.w3schools.com/jsref/prop_node_childnodes.asp -->
+
+<body>
+    <h1>The Element Object</h1>
+    <h2>The childNodes Property</h2>
+    <p>
+        Whitespace between elements are text nodes.
+        Comments are also nodes.
+    </p>
+
+    <p>The body element's child nodes are:</p>
+    <p id="demo"></p>
+
+    <script>
+        const nodeList = document.body.childNodes;
+        // Get the <body> element's child nodes
+        console.log(nodeList);  // 印出nodelist(幾個)
+        console.log(nodeList.length); // 印出長度
+
+        let text = "";
+        for (let i = 0; i < nodeList.length; i++) {
+            text += nodeList[i].nodeName + "<br>";
+            // nodeName 回傳節點的名字
+        }
+        document.getElementById("demo").innerHTML = text;
+
+        // childNodes 屬性回回傳 NodeList object 節點集合(物件)
+        // childNodes[0] = firstChild 第一個小孩
+
+    </script>
+</body>
+
+</html>

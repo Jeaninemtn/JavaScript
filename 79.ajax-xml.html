@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ajax-xml</title>
+    <style>
+        table,
+        th,
+        td {
+            border: 1px solid rgb(162, 115, 207);
+            border-collapse: collapse;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+
+        th,
+        td {
+            padding: 5px;
+        }
+
+        .styleforthis {
+            background-color: rgb(162, 115, 207);
+            color: aliceblue;
+        }
+
+    </style>
+</head>
+
+<!-- https://www.w3schools.com/js/js_ajax_xmlfile.asp -->
+<!-- https://www.w3schools.com/js/tryit.asp?filename=tryjs_ajax_xml2 -->
+
+<body>
+    <h2>The XMLHttpRequest Object</h2>
+
+    <button type="button" onclick="loadDoc()">Get my CD collection</button>
+    <br><br>
+    <table id="demo"></table>
+
+    <script>
+        function loadDoc() {
+            const xhttp = new XMLHttpRequest();  // 建立一個XMLHttpRequest物件
+            xhttp.onload = function () {  // callback function
+                myFunction(this);  // 這個this就是XMLHttpRequest物件
+                // console.log(this);
+            }
+            xhttp.open("GET", "./79.cd.xml");
+            xhttp.send();
+        }
+
+        function myFunction(xml) {
+            const xmlDoc = xml.responseXML;
+            const x = xmlDoc.getElementsByTagName("CD");  // 79.cd.xml檔案中的<CD>
+            let table = `<tr class="styleforthis">
+                            <th>Artist</th>
+                            <th>Title</th>
+                        </tr>`;
+            for (let i = 0; i < x.length; i++) {  // 跑迴圈 把所有CD帶出來
+                table += "<tr><td>" +  // 然後把資料做成表格的形式往下加加
+                    x[i].getElementsByTagName("ARTIST")[0].childNodes[0].nodeValue +
+                    "</td><td>" +
+                    x[i].getElementsByTagName("TITLE")[0].childNodes[0].nodeValue +
+                    "</td></tr>";
+            }
+            document.getElementById("demo").innerHTML = table;
+        }
+    </script>
+
+</body>
+
+</html>

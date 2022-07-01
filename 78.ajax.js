@@ -31,20 +31,21 @@
 // 非同步請求(Asynchronous request)：客戶端對伺服器端送出request之後 不需要等待結果 仍可以持續處理其他事情 甚至繼續送出其他request 待Responese傳回之後 就被融合進當下頁面或應用中
 
 
+
 function loadDoc1() {
     const xhttp = new XMLHttpRequest();  // create an XMLHttpRequest 物件
-    xhttp.onload = function() {  // onload event 等頁面載入完成後就執行function(callback function)
-      document.getElementById("demo").innerHTML = this.responseText;
-      }
+    xhttp.onload = function () {  // onload event 等頁面載入完成後就執行function(callback function)
+        document.getElementById("demo").innerHTML = this.responseText;
+    }
     xhttp.open("GET", "ajax_info.txt", true);  // true=非同步; false=同步
+    // request的方式是get
     // 預設就是true非同步 可以省略不寫
     // open(type of method, url, async or not)	
     xhttp.send();
-  }
+}
 
 
 // The XMLHttpRequest object is used to request data from a server
-
 
 // 四步驟
 // Create an XMLHttpRequest object  建立了一個XMLHttpRequest物件
@@ -55,16 +56,18 @@ function loadDoc1() {
 
 function loadDoc2() {
     const xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-      if (this.readyState == 4 && this.status == 200) {
-        // readyState:4 = 目前狀態已完成request且response is ready
-        // status:200 = Http狀態碼200就是ok的意思
-        document.getElementById("demo").innerHTML = this.responseText;
-      }
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            // readyState:4 = 目前狀態已完成request且response is ready
+            // status:200 = Http狀態碼200就是ok的意思
+            document.getElementById("demo").innerHTML = this.responseText;
+            // responseText 以字串形式回傳資料
+            // responseXML 以XML形式回傳資料(XML DOM object)
+        }
     };
     xhttp.open("GET", "ajax_info.txt");
     xhttp.send();
-  }
+}
 
 
 // readyState 
@@ -75,3 +78,43 @@ function loadDoc2() {
 // 當readyState改變時就會觸發function 只要readyState狀態改變就會一直觸發
 // defines a callback function to be executed when the readyState changes
 
+
+// AJAX-Server Response 伺服器回應
+// 1.Properties 屬性
+// responseText 以字串形式回傳資料
+// responseXML 以XML形式回傳資料(XML DOM object)
+// 2.Methods 方法
+// getResponseHeader()	Returns specific header information from the server resource
+// 只回傳特定header資料
+// getAllResponseHeaders()	Returns all the header information from the server resource
+// 回傳所有header資料
+
+
+function loadDoc3() {
+    const xhttp = new XMLHttpRequest();
+    xhttp.onload = function () {
+        const xmlDoc = this.responseXML;
+        const x = xmlDoc.getElementsByTagName("ARTIST");
+        let txt = "";
+        for (let i = 0; i < x.length; i++) {
+            txt = txt + x[i].childNodes[0].nodeValue + "<br>";
+        }
+        document.getElementById("demo").innerHTML = txt;
+    }
+    xhttp.open("GET", "cd_catalog.xml");
+    xhttp.send();
+}
+
+// From 64-1
+
+function loadData() {
+    const xhr = new XMLHttpRequest();
+    xhr.onload = function () {  // callback function
+        // console.log(xhr.responseText);
+        const ar = JSON.parse(xhr.responseText);
+        console.log(ar);
+    };
+
+    xhr.open('GET', './data/01.ball.json');
+    xhr.send();
+}
