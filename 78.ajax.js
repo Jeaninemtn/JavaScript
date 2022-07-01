@@ -40,12 +40,14 @@ function loadDoc1() {
     xhttp.open("GET", "ajax_info.txt", true);  // true=非同步; false=同步
     // request的方式是get
     // 預設就是true非同步 可以省略不寫
-    // open(type of method, url, async or not)	
+    // open(type of method, url, async or not)
+    // url 這邊放的就是我要讀取資料的網址
     xhttp.send();
 }
 
 
 // The XMLHttpRequest object is used to request data from a server
+// 建立一個 XMLHttpRequest物件 去把別人的資料儲存在裡面
 
 // 四步驟
 // Create an XMLHttpRequest object  建立了一個XMLHttpRequest物件
