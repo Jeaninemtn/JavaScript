@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>callback function</title>
+</head>
+<style>
+    body {
+        width: 100vw;
+        height: 100vh;
+        background-color: burlywood;
+        color: cadetblue;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    }
+</style>
+
+<body>
+
+    <h2>JavaScript Callback</h2>
+
+    <p>Wait 3 seconds (3000 milliseconds) for this page to change.</p>
+
+    <h1 id="demo"></h1>
+
+
+    <script>
+
+        function functionA() {
+            console.log('A');
+        }
+
+        function functionB() {
+            console.log('B');
+        }
+
+        // 一般寫法就是像這樣按照順序寫 程序也會依照順序執行
+        functionA();
+        functionB();
+
+        // ---------------------------------------------
+
+        // callback function
+
+        function functionC(e) {
+            console.log('C');
+            e();
+        }
+
+        function functionD() {
+            console.log('D');
+        }
+
+        functionC(functionD);
+
+        // ---------------------------------------------
+
+        // 為什麼要使用callback function 看下面的例子
+
+        function AA() {
+            setTimeout(function () {
+                console.log('AA');
+            }, 1000);  // 延遲1000毫秒=1秒
+        }
+
+        function BB() {
+            console.log('BB');
+        }
+
+        AA();
+        BB();
+
+        // 去console檢查會發現BB先執行了但明明AA先寫
+        // 因為AA有 setTimeout 延後執行函式
+
+        // 那如果用callback去寫
+
+        function CC(f) {
+            setTimeout(function () {
+                // setTimeout是一個很常跟回呼函式搭配使用的function
+                console.log('CC');
+                f();  // 這個可以換位子 去看看差別
+            }, 1000);  // 延遲1000毫秒=1秒
+            // f();
+        }
+
+        function DD() {
+            console.log('DD');
+        }
+
+        CC(DD);
+
+        // 使用callback function的好處
+        // 1.確保程式的執行時機與關聯性
+        // 2.方便維護
+        // 經常使用於AJAX上(非同步)
+
+        // ---------------------------------------------
+
+        // 複習一下setTimeout
+
+        setTimeout(myFunction, 3000, "QAQ");  
+        // 延遲三秒(=3000毫秒milliseconds)
+
+        // 這個寫法也可以
+
+        // setTimeout(function() { myFunction("QAQ"); }, 3000);
+        // 把 這整個 function() { myFunction("QAQ"); } 都當參數
+
+        function myFunction(value) {
+            document.getElementById("demo").innerHTML = value;
+        }
+
+        // setTimeout() 只會執行一次
+        // 如果要執行很多次 要用 setInterval()
+        // clearTimeout() 用在停止
+
+        // ---------------------------------------------
+
+        // 也有回呼地獄 怕怕 不要亂寫
+
+    </script>
+</body>
+
+</html>
