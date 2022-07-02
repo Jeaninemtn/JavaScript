@@ -27,7 +27,8 @@
 
     <p>Wait 3 seconds (3000 milliseconds) for this page to change.</p>
 
-    <h1 id="demo"></h1>
+    <h1 id="demoA"></h1>
+    <h1 id="demoB"></h1>
 
 
     <script>
@@ -105,7 +106,7 @@
 
         // 複習一下setTimeout
 
-        setTimeout(myFunction, 3000, "QAQ");  
+        setTimeout(myFunction, 3000, "QAQ");
         // 延遲三秒(=3000毫秒milliseconds)
 
         // 這個寫法也可以
@@ -114,12 +115,26 @@
         // 把 這整個 function() { myFunction("QAQ"); } 都當參數
 
         function myFunction(value) {
-            document.getElementById("demo").innerHTML = value;
+            document.getElementById("demoA").innerHTML = value;
         }
 
         // setTimeout() 只會執行一次
         // 如果要執行很多次 要用 setInterval()
         // clearTimeout() 用在停止
+
+        // 複習一下setInterval()
+
+        setInterval(myFunctionI, 1000);
+        // 每秒都會一直重新執行myFunctionI
+        // myFunctionI就是setInterval的參數 就是callback function
+
+        function myFunctionI() {
+            let d = new Date();
+            document.getElementById("demoB").innerHTML =
+                d.getHours() + ":" +
+                d.getMinutes() + ":" +
+                d.getSeconds();
+        }
 
         // ---------------------------------------------
 

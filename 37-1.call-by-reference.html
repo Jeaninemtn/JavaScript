@@ -25,10 +25,11 @@
             function func2(m){
                 m++;
             }
-            
-            func(ar, 10);
-            const br = func3(ar, 20);
+            var QQ = 20;
+            func(ar, QQ);
+            console.log("QQ", QQ);
 
+            const br = func3(ar, 20);
             // a---ar; b---20
             // func(ar, 10) --- ar--- [1, 2, 3, 10]
             // func3 --- a.unshift(b) --- return a

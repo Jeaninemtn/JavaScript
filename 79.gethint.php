@@ -2,6 +2,7 @@
 // https://www.w3schools.com/js/js_ajax_php.asp
 // Array with names
 $a[] = "Anna";
+// array_push($a,"Brittany");
 $a[] = "Brittany";
 $a[] = "Cinderella";
 $a[] = "Diana";
