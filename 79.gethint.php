@@ -101,8 +101,3 @@ echo $hint === "" ? "no suggestion" : $hint;
 // Negative numbers:
 // echo substr("Hello world", -1);  // d
 // echo substr("Hello world", -10);  // ello world
-
-// ---------------------------------------------------
-
-
-?>

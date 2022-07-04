@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Object.keys</title>
+</head>
+
+<!-- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys -->
+
+<!-- https://titangene.github.io/article/javascript-object-keys-values-entries.html -->
+
+<body>
+    <p id="demo"></p>
+
+    <script src="./js/jquery-3.6.0.min.js"></script>
+    <script>
+
+        // Object.keys() 可直接取得所有 property name
+
+        let object = {
+            a: 1,
+            b: 2,
+            c: 3
+        };
+
+        console.log(Object.keys(object));  // 回傳的是array
+
+        document.getElementById('demo').innerHTML = Object.keys(object);
+
+        // 用 for of 迴圈去寫 可以回傳字串
+
+        for (const key of Object.keys(object)) {
+            console.log('for of', key); 
+            console.log('typeof', typeof key);  // string
+        }
+
+    </script>
+</body>
+
+</html>
