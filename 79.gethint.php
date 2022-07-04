@@ -36,16 +36,16 @@ $a[] = "Vicky";
 // get the q parameter from URL
 $q = $_REQUEST["q"];
 // request 用來收集送出表單後的資料
-
+// 在這邊指的應該是input的value吧
 
 $hint = "";
 // hint預設空字串
 
 // lookup all hints from array if $q is different from ""
-if ($q !== "") {
-  $q = strtolower($q);  // Make a string lowercase
-  $len = strlen($q);  // Get string length
-  foreach ($a as $name) {
+if ($q !== "") {  // 如果$q不是空字串 那就執行以下
+  $q = strtolower($q);  // Make a string lowercase 先把input的值轉為小寫
+  $len = strlen($q);  // Get string length 抓input值的長度
+  foreach ($a as $name) {  // 跑迴圈 去找有沒有符合的字串
     if (stristr($q, substr($name, 0, $len))) {
       if ($hint === "") {
         $hint = $name;
@@ -60,14 +60,13 @@ if ($q !== "") {
 echo $hint === "" ? "no suggestion" : $hint;
 
 
-
 // stristr() 用法
 
 // The stristr() function searches for the first occurrence of a string inside another string. 找字串裡的字串(第一個出現ㄉ)，不區分大小寫
 
 // https://www.w3schools.com/php/func_string_stristr.asp
 
-echo stristr("Hello world!", "WORLD");
+// echo stristr("Hello world!", "WORLD");
 // 從hello world去找world
 // 印出world!
 
@@ -76,7 +75,7 @@ echo stristr("Hello world!", "WORLD");
 // 2. search: 要找的目標字串 (Specifies the string to search for)
 // 3. before_search: (optional) A boolean value whose default is "false". If set to "true", it returns the part of the string before the first occurrence of the search parameter. 預設值為false, 如果設定true，會回傳目標字串*之前*的字串
 
-echo stristr("Hello world!", "WORLD", true);
+// echo stristr("Hello world!", "WORLD", true);
 // 印出Hello
 
 
@@ -95,41 +94,15 @@ echo stristr("Hello world!", "WORLD", true);
 // 3. length: (optional) 規定要回傳的字串長度
 
 // Positive numbers:
-echo substr("Hello world", 10)."<br>";  // d
-echo substr("Hello world", 1)."<br>";  // ello world
+// echo substr("Hello world", 10)."<br>";  // d
+// echo substr("Hello world", 1)."<br>";  // ello world
 // 記得點連接法ㄅ
 
 // Negative numbers:
-echo substr("Hello world", -1);  // d
-echo substr("Hello world", -10);  // ello world
+// echo substr("Hello world", -1);  // d
+// echo substr("Hello world", -10);  // ello world
 
 // ---------------------------------------------------
 
 
 ?>
-
-
-<!-- 看一下$_REQUEST的用法 -->
-
-<html>
-<body>
-
-<form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
-  Name: <input type="text" name="fname">
-  <input type="submit">
-</form>
-
-<?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-  // collect value of input field
-  $name = $_REQUEST['fname'];
-  if (empty($name)) {
-    echo "Name is empty";
-  } else {
-    echo $name;
-  }
-}
-?>
-
-</body>
-</html>
