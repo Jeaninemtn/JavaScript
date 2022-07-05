@@ -13,27 +13,41 @@
 <!-- https://titangene.github.io/article/javascript-object-keys-values-entries.html -->
 
 <body>
-    <p id="demo"></p>
+    <p id="demoarr"></p>
+    <p id="demoobj"></p>
+
 
     <script src="./js/jquery-3.6.0.min.js"></script>
     <script>
 
         // Object.keys() 可直接取得所有 property name
 
+        // array
+        let arr = [
+            "allen",
+            "julie",
+            "sam"
+        ];
+
+        // object
         let object = {
             a: 1,
             b: 2,
             c: 3
         };
 
-        console.log(Object.keys(object));  // 回傳的是array
+        console.log('arr', Object.keys(arr));  // 回傳的是array
+        console.log('obj', Object.keys(object));  // 回傳的是array
 
-        document.getElementById('demo').innerHTML = Object.keys(object);
+        document.getElementById('demoarr').innerHTML = Object.keys(arr);  // 印出0, 1, 2
+        document.getElementById('demoobj').innerHTML = Object.keys(object);  // 印出 a, b, c
+
 
         // 用 for of 迴圈去寫 可以回傳字串
 
+        
         for (const key of Object.keys(object)) {
-            console.log('for of', key); 
+            console.log('for of', key);
             console.log('typeof', typeof key);  // string
         }
 
