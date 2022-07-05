@@ -38,6 +38,8 @@ $q = $_REQUEST["q"];
 // request 用來收集送出表單後的資料
 // 在這邊指的應該是input的value吧
 
+// echo $q;
+
 $hint = "";
 // hint預設空字串
 
