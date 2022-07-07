@@ -1,3 +1,4 @@
+<!-- https://ithelp.ithome.com.tw/articles/10215281 -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -5,7 +6,7 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
+        <title>map</title>
         <link rel="stylesheet" href="./bootstrap/css/bootstrap.css">
     </head>
     <body>
@@ -71,8 +72,6 @@
             renderTable();
 
 
-
-
             function sortByAge() {
                 data.sort(function (a, b) {
                     return a.age - b.age;
@@ -88,6 +87,11 @@
                 console.log(data);
                 renderTable();
             }
+
+            // map() 會透過函式內所回傳的值組合成一個新的陣列
+            // 不會改變原來的陣列 新的陣列長度會等於原陣列
+            // 使用map()去呼叫函式 可以讓原陣列裡的每個元素去執行function 將每個元素執行完的結果回傳至新的陣列裡
+            
         </script>
     </body>
 </html>
