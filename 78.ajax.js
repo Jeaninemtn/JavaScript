@@ -1,6 +1,11 @@
 // AJAX
 
+// AJAX是一個透過JavaScript的非同步從網頁前端去向後端伺服器溝通的技術
+// 客戶端這邊丟request給server server會依照請求的方法與格式再回傳response回到客戶端
+
 // https://tw.alphacamp.co/blog/ajax-asynchronous-request
+
+// https://www.casper.tw/development/2020/09/30/about-ajax/
 
 // An event occurs 當有事件被觸發(例如點選按鈕)
 
