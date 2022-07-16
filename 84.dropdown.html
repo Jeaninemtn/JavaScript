@@ -88,11 +88,19 @@
                 checkList.classList.add('visible');
         }
 
-        var selected = document.querySelectorAll('input[type="checkbox"]:checked');
-        for ( let i = 0; i < selected.length ; i++) {
+        // 印出選項所有value
+        var selected = document.querySelectorAll('input[type="checkbox"]');
+        for (let i = 0; i < selected.length; i++) {
             console.log(selected[i].value);
         }
-        
+
+        // 我要印只有checked的value
+        selected.forEach(ele => ele.addEventListener('checked', checkItems));
+
+        function checkItems () { 
+            var checked = document.querySelectorAll('input[type="checkbox"]:checked');
+            console.log(checked);
+         }
 
     </script>
 
