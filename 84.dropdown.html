@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            font-size: 1.4rem;
+        }
+
+        .dropdown-check-list {
+            display: inline-block;
+        }
+
+        .dropdown-check-list span {
+            position: relative;
+            cursor: pointer;
+            display: inline-block;
+            padding: 5px 50px 5px 10px;
+            border: 1px solid #ccc;
+        }
+
+        .dropdown-check-list span:after {
+            position: absolute;
+            content: "";
+            border-left: 2px solid black;
+            border-top: 2px solid black;
+            padding: 5px;
+            right: 10px;
+            top: 20%;
+            -moz-transform: rotate(-135deg);
+            -ms-transform: rotate(-135deg);
+            -o-transform: rotate(-135deg);
+            -webkit-transform: rotate(-135deg);
+            transform: rotate(-135deg);
+        }
+
+        .dropdown-check-list span:active:after {
+            right: 8px;
+            top: 21%;
+        }
+
+        .dropdown-check-list ul.items {
+            padding: 2px;
+            display: none;
+            margin: 0;
+            border: 1px solid #ccc;
+            border-top: none;
+        }
+
+        .dropdown-check-list ul.items li {
+            list-style: none;
+        }
+
+        .dropdown-check-list.visible span {
+            color: #0094ff;
+        }
+
+        .dropdown-check-list.visible .items {
+            display: block;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="list" class="dropdown-check-list">
+        <span class="selectItems">Choose</span>
+        <ul class="items">
+            <li><input type="checkbox" value="Apple" />Apple </li>
+            <li><input type="checkbox" value="Orange" />Orange</li>
+            <li><input type="checkbox" value="Grapes" />Grapes </li>
+            <li><input type="checkbox" value="Berry" />Berry </li>
+            <li><input type="checkbox" value="Mango" />Mango </li>
+        </ul>
+    </div>
+
+    <script>
+        var checkList = document.getElementById('list');
+        checkList.getElementsByClassName('selectItems')[0].onclick = function (event) {
+            if (checkList.classList.contains('visible'))
+                checkList.classList.remove('visible');
+            else
+                checkList.classList.add('visible');
+        }
+
+        var selected = document.querySelectorAll('input[type="checkbox"]:checked');
+        for ( let i = 0; i < selected.length ; i++) {
+            console.log(selected[i].value);
+        }
+        
+
+    </script>
+
+</body>
+
+</html>
