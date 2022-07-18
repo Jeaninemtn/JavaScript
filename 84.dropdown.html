@@ -88,6 +88,7 @@
 
     <script>
 
+        // 選單收合
         var checkList = document.getElementById('list');
         checkList.getElementsByClassName('selectItems')[0].onclick = function (event) {
             if (checkList.classList.contains('visible')) {
@@ -98,23 +99,31 @@
             }
         }
 
-
+        // 選取所有的checkbox
         var selected = document.querySelectorAll('input[type="checkbox"]');
         for (let i = 0; i < selected.length; i++) {
             const selectedValue = selected[i].value;
             // console.log(selectedValue);
         }
 
+        // 在所有的checkbox上綁偵測 如果被點擊就執行以下function
         selected.forEach(e => e.addEventListener("click", displayValue));
 
-        var checked = [];
+        var checked_items = [];
         function displayValue() {
-            if (checked.includes(this.value)) {
-                document.getElementById('valueName').innerHTML = checked;
-            } else {
-                checked.push(this.value);
-                console.log(checked);
-                document.getElementById('valueName').innerHTML = checked;
+            var checked_value = "";  // 每次點擊都清空上次點擊紀錄
+            // 選取被checked的checkbox
+            checked_items = document.querySelectorAll('input[type="checkbox"]:checked');
+            // 跑迴圈把所有checked的value拿出來
+            for (let i = 0; i < checked_items.length; i++) {
+                checked_value = checked_value + checked_items[i].value + ", ";
+            }
+            // 把value帶回HTML顯示出來
+            document.getElementById('valueName').innerHTML = checked_value;
+
+            // 如果沒有任何東西被checked 顯示choose就好
+            if (checked_value == "") {
+                document.getElementById('valueName').innerHTML = "Choose";
             }
         };
 
