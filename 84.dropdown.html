@@ -6,54 +6,48 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         body {
             font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
             font-size: 1.4rem;
+            color: #655691;
         }
 
         .dropdown-check-list {
             display: inline-block;
         }
 
-        .dropdown-check-list span {
+        .dropdown-check-list {
             position: relative;
             cursor: pointer;
             display: inline-block;
-            padding: 5px 50px 5px 10px;
-            border: 1px solid #ccc;
+            padding: 10px 20px;
+            border: 2px solid #655691;
         }
 
-        .dropdown-check-list span:after {
-            position: absolute;
-            content: "";
-            border-left: 2px solid black;
-            border-top: 2px solid black;
-            padding: 5px;
-            right: 10px;
-            top: 20%;
-            -moz-transform: rotate(-135deg);
-            -ms-transform: rotate(-135deg);
-            -o-transform: rotate(-135deg);
-            -webkit-transform: rotate(-135deg);
-            transform: rotate(-135deg);
+        .selectItems {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        .dropdown-check-list span:active:after {
-            right: 8px;
-            top: 21%;
+        .selectItems span {
+            margin-right: 30px;
         }
 
         .dropdown-check-list ul.items {
             padding: 2px;
             display: none;
             margin: 0;
-            border: 1px solid #ccc;
             border-top: none;
         }
 
         .dropdown-check-list ul.items li {
             list-style: none;
+            margin-top: 10px;
         }
 
         .dropdown-check-list.visible span {
@@ -69,38 +63,60 @@
 
 <body>
     <div id="list" class="dropdown-check-list">
-        <span class="selectItems">Choose</span>
+        <div class="selectItems">
+            <span id="valueName">Choose</span>
+            <i class="fa-solid fa-angle-down"></i>
+        </div>
         <ul class="items">
-            <li><input type="checkbox" value="Apple" />Apple </li>
-            <li><input type="checkbox" value="Orange" />Orange</li>
-            <li><input type="checkbox" value="Grapes" />Grapes </li>
-            <li><input type="checkbox" value="Berry" />Berry </li>
-            <li><input type="checkbox" value="Mango" />Mango </li>
+            <li><input type="checkbox" value="Apple" />
+                <label for="">Apple</label>
+            </li>
+            <li><input type="checkbox" value="Orange" />
+                <label for="">Orange</label>
+            </li>
+            <li><input type="checkbox" value="Kiwi" />
+                <label for="">Kiwi</label>
+            </li>
+            <li><input type="checkbox" value="Banana" />
+                <label for="">Banana</label>
+            </li>
+            <li><input type="checkbox" value="Mango" />
+                <label for="">Mango</label>
+            </li>
         </ul>
     </div>
 
     <script>
+
         var checkList = document.getElementById('list');
         checkList.getElementsByClassName('selectItems')[0].onclick = function (event) {
-            if (checkList.classList.contains('visible'))
+            if (checkList.classList.contains('visible')) {
                 checkList.classList.remove('visible');
-            else
+            }
+            else {
                 checkList.classList.add('visible');
+            }
         }
 
-        // 印出選項所有value
+
         var selected = document.querySelectorAll('input[type="checkbox"]');
         for (let i = 0; i < selected.length; i++) {
-            console.log(selected[i].value);
+            const selectedValue = selected[i].value;
+            // console.log(selectedValue);
         }
 
-        // 我要印只有checked的value
-        selected.forEach(ele => ele.addEventListener('checked', checkItems));
+        selected.forEach(e => e.addEventListener("click", displayValue));
 
-        function checkItems () { 
-            var checked = document.querySelectorAll('input[type="checkbox"]:checked');
-            console.log(checked);
-         }
+        var checked = [];
+        function displayValue() {
+            if (checked.includes(this.value)) {
+                document.getElementById('valueName').innerHTML = checked;
+            } else {
+                checked.push(this.value);
+                console.log(checked);
+                document.getElementById('valueName').innerHTML = checked;
+            }
+        };
 
     </script>
 
