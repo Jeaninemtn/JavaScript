@@ -111,6 +111,20 @@
 
         var checked_items = [];
         function displayValue() {
+
+            // -------------------------------------------------
+
+            // 原先是這樣思考的
+
+            // if (checked.includes(this.value)) {
+            //     document.getElementById('valueName').innerHTML = checked;
+            // } else {
+            //     checked.push(this.value);
+            //     console.log(checked);
+            //     document.getElementById('valueName').innerHTML = checked;
+
+            // -------------------------------------------------
+            
             var checked_value = "";  // 每次點擊都清空上次點擊紀錄
             // 選取被checked的checkbox
             checked_items = document.querySelectorAll('input[type="checkbox"]:checked');
