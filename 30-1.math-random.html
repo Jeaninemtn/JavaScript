@@ -4,7 +4,7 @@
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>random</title>
+        <title>math.random()</title>
     </head>
     <body>
         <div id="info"></div>
@@ -15,13 +15,13 @@
             // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
 
             const ar = [];
-            for(let i=1; i<=42; i++){
+            for (let i=1; i<=42; i++) {
                 ar.push(i);
             }
             info.innerHTML = ar.toString();
 
             ar.sort(function(){
-                return Math.random()-.5;
+                return Math.random()-0.5;
             });
 
             info.innerHTML += '<br>' + ar.toString();
