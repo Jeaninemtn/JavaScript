@@ -14,14 +14,14 @@
 
             const str =
                 "畢竟都已經確定無緣季後賽了，湖人做出輪休「三巨頭」決定也無可厚非";
-            const ar1 = str.split("");
+            const ar1 = str.split("");  // 先把字串分割 產生一個新陣列
             const ar2 = [2, 4, 6, 19, 8, 32, 63];
 
             ar1.sort(); // 盡量不使用中文字做排序 因為中文字使用部首排序 不實用
             ar2.sort(); // 預設以字串做排序
 
-            console.log(ar1);
-            console.log(ar2);
+            console.log("ar1", ar1);
+            console.log("ar2", ar2);
 
             // callback function
             ar2.sort(function (a, b) {

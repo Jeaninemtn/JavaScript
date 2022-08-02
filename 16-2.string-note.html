@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>string note</title>
+</head>
+<body>
+    <script>
+
+        // https://www.w3schools.com/jsref/jsref_split.asp
+
+        // split() 把字串分割 成為一個新陣列(不改變原陣列)
+
+        const text = "How are you doing today?";
+        const myArray = text.split(" "); // 以空格作為切割點
+        const word = myArray[1];
+
+        console.log(myArray);
+        console.log(word);
+
+        const qq = text.split("o");  // 以o作為切割點
+        console.log(qq);
+
+    </script>
+</body>
+</html>
