@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>number animation</title>
+</head>
+
+<!-- https://rong1649r.pixnet.net/blog/post/100514990 -->
+
+<body>
+
+    <p>Case 1<span id="pageLoad">0</span></p>
+
+    <p>Case 2<span id="fun-level">0</span></p>
+
+    <script src="./js/jquery-3.6.0.min.js"></script>
+    <script>
+
+        (function ($) {
+            $.fn.animateNumbers = function (stop, commas, duration, ease) {
+                return this.each(function () {
+                    var $this = $(this);
+                    var start = parseInt($this.text().replace(/,/g, ""));
+                    commas = (commas === undefined) ? true : commas;
+                    $({ value: start }).animate({ value: stop }, {
+                        duration: duration == undefined ? 1000 : duration,
+                        easing: ease == undefined ? "swing" : ease,
+                        step: function () {
+                            $this.text(Math.floor(this.value));
+                            if (commas) { $this.text($this.text().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")); }
+                        },
+                        complete: function () {
+                            if (parseInt($this.text()) !== stop) {
+                                $this.text(stop);
+                                if (commas) { $this.text($this.text().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")); }
+                            }
+                        }
+                    });
+                });
+            };
+        })(jQuery);
+
+        $(document).ready(function () {
+            $("#pageLoad").animateNumbers(5000, true, 2000);
+        });
+        
+
+        // ------------------------------------------
+
+
+        $('#fun-level').animateNumber(
+            {
+                number: 100,
+                color: 'green',
+                'font-size': '45px',
+
+                easing: 'easeInQuad',
+
+                numberStep: function (now, tween) {
+                    var floored_number = Math.floor(now),
+                        target = $(tween.elem);
+
+                    target.text(floored_number);
+                }
+            },
+            1800
+        );
+
+
+    </script>
+</body>
+
+</html>
