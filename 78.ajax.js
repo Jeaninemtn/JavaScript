@@ -24,9 +24,6 @@
 
 // 但現在也會使用 Fetch API instead of XMLHttpRequest Object
 
-// 那非同步的意思就是:
-// 不知道事件什麼時候會發生 但可以先把要發生的函式準備好 等到事件發生時就進行處理
-
 // 當我們在串接第三方API時 由於要等待遠端伺服器回應 等待的時候有可能會大幅影響到使用者的體驗(會一直loading) 所以非同步請求變得更加重要
 
 // 比較
@@ -34,7 +31,6 @@
 // 同步請求(Synchronous request)：客戶端對伺服器端送出request並且在收到伺服器端的response之後才會繼續下一步的動作 等待的期間無法處理其他事情 這個作法並不理想 因為通常伺服器端的運算速度比本地電腦慢上好幾倍
 
 // 非同步請求(Asynchronous request)：客戶端對伺服器端送出request之後 不需要等待結果 仍可以持續處理其他事情 甚至繼續送出其他request 待Responese傳回之後 就被融合進當下頁面或應用中
-
 
 
 function loadDoc1() {

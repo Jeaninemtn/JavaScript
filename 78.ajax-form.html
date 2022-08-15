@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>form by using ajax</title>
+    <!-- https://www.geeksforgeeks.org/how-to-submit-a-form-using-ajax-in-jquery/ -->
+    <style>
+        body {
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+
+        div {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <form id='formId' action=''>
+        <div>
+            <label for="nm">Name:</label>
+            <input type='text' id='nm' name='nm'></input>
+        </div>
+        <div>
+            <label for="studentId">Student ID:</label>
+            <input type='text' id='studentId' name='studentId'></input>
+        </div>
+        <div>
+            <label for="contactNumber">Contact No. :</label>
+            <input type='text' id='contactNumber' name='contactNumber'></input>
+        </div>
+        <button type='submit' id='submitButton'>Submit</button>
+    </form>
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <script>
+        // When DOM is loaded this
+        // function will get executed
+        $(() => {
+            // function will get executed 
+            // on click of submit button
+            $("#submitButton").click(function (ev) {
+                var form = $("#formId");
+                var url = form.attr('action');
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    data: form.serialize(),
+                    success: function (data) {
+                        // Ajax call completed successfully
+                        alert("Form Submited Successfully");
+                    },
+                    error: function (data) {
+                        // Some error in ajax call
+                        alert("some Error");
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
