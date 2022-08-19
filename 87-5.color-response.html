@@ -15,6 +15,7 @@
             padding: 0;
             margin: 0;
             box-sizing: border-box;
+            /* outline: 1px solid red; */
         }
         
         body {
@@ -24,11 +25,24 @@
             align-items: center;
         }
 
-        .input-box{
+        #form {
             display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
+        }
+
+        .input-box-a {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+
+        }
+
+        .input-box-b {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 10px;
+            margin-bottom: 10px;
         }
 
         #box {
@@ -37,11 +51,12 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            border: 4px solid #aaf;
-            color: #aaf;
+            border: 4px solid #000;
+            /* color: #aaa; */
             /* background-color: #aaf; */
             margin-top: 10px;
         }
+
         #text {
             font-family: 'Lemon', cursive;
             letter-spacing: 0.2rem;
@@ -52,26 +67,71 @@
 </head>
 
 <body>
-
-    <div class="input-box">
-        <input type="color" name="bgC" oninput="myFunc(event)">
-        <input type="file">
-        <div id="box">
-            <h1 id="text">YES</h1>
-        </div>
-    </div>
+        <form id="form">
+            <div class="input-box-a">
+                <input type="color" name="bgC" oninput="myFunc(event)">
+            <div class="input-box-b">
+                <input type="file" accept=".pdf,.png, .jpg" onChange="fileUpload">
+                <button type="reset" onclick="toReset()">reset</button>
+            </div>
+            </div>
+            <div id="box">
+                <h1 id="text">YES</h1>
+            </div>
+        </form>
 
     <script>
 
         // 根據圖片背景 改變字顏色跟框框顏色
 
-
-
-
+        // https://stackoverflow.com/questions/32928517/change-text-color-depending-on-background-image-color
         
         // http://aerolab.github.io/midnight.js/
+       
         // http://www.kennethcachia.com/background-check/
+
         
+
+        
+        // 根據input color去選背景色 + 自動挑對比色填入框框
+        
+        function myFunc(ev) {
+            selectedColor = document.querySelector('input[type="color"]') ? document.querySelector('input[type="color"]').value : 0;
+            // console.log(selectedColor);
+
+            // 把顏色轉成rgb形式 (原先是16進位)
+            const color = ev.target.value
+            const r = parseInt(color.substr(1, 2), 16)
+            const g = parseInt(color.substr(3, 2), 16)
+            const b = parseInt(color.substr(5, 2), 16)
+            // console.log(`${r}, ${g}, ${b}`);
+
+            selectedColor = [r, g, b];
+
+            document.getElementById('text').style.color = "rgb" + "(" + selectedColor.toString() + ")";
+            document.getElementById('box').style.borderColor = "rgb" + "(" + selectedColor.toString() + ")";
+            
+            // 開始抓對比色
+            const br = 255 - r;
+            const bg = 255 - g;
+            const bb = 255 - b;
+            bodyBGC = [br, bg, bb];
+            // console.log(bodyBGC);
+
+            var Body = document.getElementsByTagName("BODY")[0];
+            Body.style.backgroundColor = "rgb" + "(" + bodyBGC.toString() + ")";
+        }
+
+        // 回到預設
+
+        function toReset() {
+            document.getElementById('form').reset();
+        }
+
+        function backtoDefault() {
+            document.getElementById('text').style.color = "#000000";
+            document.getElementById('box').style.borderColor = "#000000";
+        }
 
     </script>
 </body>

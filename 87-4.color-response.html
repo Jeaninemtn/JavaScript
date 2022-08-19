@@ -75,9 +75,10 @@
             const b = parseInt(color.substr(5, 2), 16)
             // console.log(`${r}, ${g}, ${b}`);
 
+            selectedColor = [r, g, b];
 
-            document.getElementById('text').style.color = "rgb" + "(" + r + "," + g + "," + b + ")";
-            document.getElementById('box').style.borderColor = "rgb" + "(" + r + "," + g + "," + b + ")";
+            document.getElementById('text').style.color = "rgb" + "(" + selectedColor.toString() + ")";
+            document.getElementById('box').style.borderColor = "rgb" + "(" + selectedColor.toString() + ")";
             
             // 開始抓對比色
             const br = 255 - r;
