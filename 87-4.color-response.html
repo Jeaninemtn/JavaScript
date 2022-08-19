@@ -7,27 +7,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Secular+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lemon&display=swap" rel="stylesheet">
     <title>color response</title>
     <style>
-        
+
         * {
             padding: 0;
             margin: 0;
             box-sizing: border-box;
         }
-
+        
         body {
             display: flex;
             height: 100vh;
             justify-content: center;
             align-items: center;
-            font-family: 'Secular One', sans-serif;
         }
 
-        .input-box {
+        .input-box{
             display: flex;
             flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
 
         #box {
@@ -39,7 +40,14 @@
             border: 4px solid #aaf;
             color: #aaf;
             /* background-color: #aaf; */
+            margin-top: 10px;
         }
+        #text {
+            font-family: 'Lemon', cursive;
+            letter-spacing: 0.2rem;
+            text-indent: 0.2rem;
+        }
+
     </style>
 </head>
 
@@ -47,12 +55,15 @@
 
     <div class="input-box">
         <input type="color" name="bgC" oninput="myFunc(event)">
+        <div id="box">
+            <h1 id="text">YES</h1>
+        </div>
     </div>
 
     <script>
 
-        // 選取顏色 背景色自動抓對比色
-
+        // 用input color去選背景色 + 自動挑對比色填入框框
+        
         function myFunc(ev) {
             selectedColor = document.querySelector('input[type="color"]') ? document.querySelector('input[type="color"]').value : 0;
             // console.log(selectedColor);
@@ -62,8 +73,12 @@
             const r = parseInt(color.substr(1, 2), 16)
             const g = parseInt(color.substr(3, 2), 16)
             const b = parseInt(color.substr(5, 2), 16)
-            // console.log(`red: ${r}, green: ${g}, blue: ${b}`)
+            // console.log(`${r}, ${g}, ${b}`);
 
+
+            document.getElementById('text').style.color = "rgb" + "(" + r + "," + g + "," + b + ")";
+            document.getElementById('box').style.borderColor = "rgb" + "(" + r + "," + g + "," + b + ")";
+            
             // 開始抓對比色
             const br = 255 - r;
             const bg = 255 - g;
@@ -74,14 +89,7 @@
             var Body = document.getElementsByTagName("BODY")[0];
             Body.style.backgroundColor = "rgb" + "(" + bodyBGC.toString() + ")";
         }
-
-        // oninput用法
-        // https://www.w3schools.com/jsref/event_oninput.asp
-
-        // input color get rgb value
-        // https://stackoverflow.com/questions/58184508/html5-input-type-color-read-single-rgb-values
-
-
+        
     </script>
 </body>
 

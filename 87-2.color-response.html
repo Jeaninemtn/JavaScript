@@ -12,6 +12,9 @@
             font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
             letter-spacing: 0.2rem;
             text-indent: 0.2rem;
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
         }
 
         .container {
@@ -91,13 +94,10 @@
             boX.style.backgroundColor = "rgb" + "(" + rgbArr.toString() + ")";
 
             // 如果背景色是灰色調 (抓不到對比色)
-            if ( R == G && R == B && G == B || (120<R<140)&&(120<G<140)&&(120<B<140)) {
-
+            if ( R == G && R == B && G == B) {
                 boX.style.color = resBgColor(rgbArr);
                 boX.style.borderColor = resBgColor(rgbArr);
-
-                } else {  // 背景不是灰色調
-
+            } else {  // 背景不是灰色調
                 // border顏色 找出背景色的對比色
                 rR = 255 - R;
                 rG = 255 - G;
@@ -111,7 +111,6 @@
         }
 
         // 背景色是灰色調的時候要執行的判斷深淺的func
-
         function resBgColor(rgbArr) {
             var color = 0.213 * rgbArr[0] + 0.715 * rgbArr[1] + 0.072 * rgbArr[2] > 255 / 2;
             return color ? '#000000' : '#ffffff'
