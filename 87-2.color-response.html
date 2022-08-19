@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>color response</title>
+    <style>
+        * {
+            /* outline: 1px solid red; */
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            letter-spacing: 0.2rem;
+            text-indent: 0.2rem;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .input-box {
+            display: flex;
+            padding-bottom: 20px;
+        }
+
+        .button {
+            
+            margin-bottom: 20px;
+        }
+
+        #box {
+            width: 200px;
+            height: 200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 4px solid #aaf;
+            color: #aaf;
+            /* background-color: #aaf; */
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="input-box">
+            <div style="margin-right: 20px;">
+                <label for="R">R</label>
+                <input id="R" type="number" name="R" max="255" min="0" required>
+            </div>
+            <div style="margin-right: 20px;">
+                <label for="G">G</label>
+                <input id="G" type="number" name="G" max="255" min="0" required>
+            </div>
+            <div>
+                <label for="B">B</label>
+                <input id="B" type="number" name="B" max="255" min="0" required>
+            </div>
+        </div>
+        <div class="button" onclick="myFunc()">
+            <button>CHECK</button>
+        </div>
+        <div id="box">
+            <h1 id="text">YES</h1>
+        </div>
+    </div>
+
+    <script>
+
+        // 用背景顏色去抓對比色變成框框顏色
+
+        function myFunc() {
+
+            // BOX背景色
+            // 先抓到input的值
+            const R = document.getElementById('R').value ? document.getElementById('R').value : 0;
+            const G = document.getElementById('G').value ? document.getElementById('G').value : 0;
+            const B = document.getElementById('B').value ? document.getElementById('B').value : 0;
+
+            // 把它組起來
+            rgbArr = [R, G, B];
+            // console.log(rgbArr);
+            
+            var boX = document.getElementById('box');
+            // 把它組起來變成RGB (=BOX的背景色)
+            boX.style.backgroundColor = "rgb" + "(" + rgbArr.toString() + ")";
+
+            // 如果背景色是灰色調 (抓不到對比色)
+            if ( R == G && R == B && G == B || (120<R<140)&&(120<G<140)&&(120<B<140)) {
+
+                boX.style.color = resBgColor(rgbArr);
+                boX.style.borderColor = resBgColor(rgbArr);
+
+                } else {  // 背景不是灰色調
+
+                // border顏色 找出背景色的對比色
+                rR = 255 - R;
+                rG = 255 - G;
+                rB = 255 - B;
+                rvsRGB = [rR, rG, rB];
+                console.log(rvsRGB);
+                // 把它組起來變成RGB (=BOX的border色)
+                boX.style.borderColor = "rgb" + "(" + rvsRGB.toString() + ")";
+                boX.style.color = "rgb" + "(" + rvsRGB.toString() + ")";
+                }
+        }
+
+        // 背景色是灰色調的時候要執行的判斷深淺的func
+
+        function resBgColor(rgbArr) {
+            var color = 0.213 * rgbArr[0] + 0.715 * rgbArr[1] + 0.072 * rgbArr[2] > 255 / 2;
+            return color ? '#000000' : '#ffffff'
+
+            // 如果是淺色 就回傳 #000
+            // 如果顏色是深色 就回傳 #fff
+        }
+
+
+        // 抓對比色
+
+        // https://blog.csdn.net/chelen_jak/article/details/108470321
+
+        // 找對比色的網站
+        
+        // https://www.colorhexa.com/
+
+
+    </script>
+</body>
+
+</html>

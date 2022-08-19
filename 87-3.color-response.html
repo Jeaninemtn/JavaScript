@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Secular+One&display=swap" rel="stylesheet">
+    <title>color response</title>
+    <style>
+        body {
+            display: flex;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Secular One', sans-serif;
+        }
+
+        .input-box {
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="input-box">
+        <input type="color" name="bgC" oninput="myFunc(event)">
+    </div>
+
+    <script>
+
+        // 選取顏色 背景色自動抓對比色
+
+        function myFunc(ev) {
+            selectedColor = document.querySelector('input[type="color"]') ? document.querySelector('input[type="color"]').value : 0;
+            // console.log(selectedColor);
+
+            // 把顏色轉成rgb形式 (原先是16進位)
+            const color = ev.target.value
+            const r = parseInt(color.substr(1, 2), 16)
+            const g = parseInt(color.substr(3, 2), 16)
+            const b = parseInt(color.substr(5, 2), 16)
+            // console.log(`red: ${r}, green: ${g}, blue: ${b}`)
+
+            // 開始抓對比色
+            const br = 255 - r;
+            const bg = 255 - g;
+            const bb = 255 - b;
+            bodyBGC = [br, bg, bb];
+            // console.log(bodyBGC);
+
+            var Body = document.getElementsByTagName("BODY")[0];
+            Body.style.backgroundColor = "rgb" + "(" + bodyBGC.toString() + ")";
+        }
+
+        // oninput用法
+        // https://www.w3schools.com/jsref/event_oninput.asp
+
+        // input color get rgb value
+        // https://stackoverflow.com/questions/58184508/html5-input-type-color-read-single-rgb-values
+
+        
+    </script>
+</body>
+
+</html>
