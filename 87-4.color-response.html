@@ -77,18 +77,18 @@
 
             selectedColor = [r, g, b];
 
-            document.getElementById('text').style.color = "rgb" + "(" + selectedColor.toString() + ")";
-            document.getElementById('box').style.borderColor = "rgb" + "(" + selectedColor.toString() + ")";
-            
+            var Body = document.getElementsByTagName("BODY")[0];
+            Body.style.backgroundColor = "rgb" + "(" + selectedColor.toString() + ")";
+
             // 開始抓對比色
             const br = 255 - r;
             const bg = 255 - g;
             const bb = 255 - b;
-            bodyBGC = [br, bg, bb];
-            // console.log(bodyBGC);
+            rvsColor = [br, bg, bb];
+            // console.log(rvsColor);
 
-            var Body = document.getElementsByTagName("BODY")[0];
-            Body.style.backgroundColor = "rgb" + "(" + bodyBGC.toString() + ")";
+            document.getElementById('text').style.color = "rgb" + "(" + rvsColor.toString() + ")";
+            document.getElementById('box').style.borderColor = "rgb" + "(" + rvsColor.toString() + ")";
         }
         
     </script>
