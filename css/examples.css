@@ -36,17 +36,14 @@
 }
 
 .icon {
+    width: 30px;
+    height: 30px;
     background: #10bdc9;
     border-radius: 50%;
 }
 
 .icon--simple {
     border-radius: 0;
-}
-
-.border--one .icon {
-    width: 30px;
-    height: 30px;
 }
 
 .icon.background--light {

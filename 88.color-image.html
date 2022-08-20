@@ -1,3 +1,6 @@
+<!-- http://www.kennethcachia.com/background-check/ -->
+<!-- 用這個做滴 -->
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,7 +19,7 @@
     <script src="./scripts/drag.js"></script>
     <script src="./scripts/main.js"></script>
     <style>
-        
+
         * {
             padding: 0;
             margin: 0;
@@ -34,8 +37,8 @@
         }
 
         .demo {
-            width: 100vw;
-            height: 100vh;
+            width: 100%;
+            height: 100%;
         }
 
         .demo-images {
@@ -48,6 +51,43 @@
             height: 100%;
             object-fit: cover;
         }
+
+        .icon.target::before,
+        .icon.target::after {
+            content: ""; 
+            /* 偽元素一定要寫content */
+            position: absolute;
+            /* 讓兩顆球相疊在同一位置 */
+            top: 50%;
+            left: 50%;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #0fabb7;
+            transform: translate(-50%, -50%);
+        }
+
+        .icon.target::before {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            animation: animate-ball 3s infinite;
+        }
+
+        @keyframes animate-ball {
+            0% {
+               opacity: 0;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+
     </style>
 </head>
 
