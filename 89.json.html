@@ -1,38 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>JSON</title>
-  </head>
-  <body>
 
-    <p id="demob"></p>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JSON</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cherry+Swash:wght@400;700&display=swap" rel="stylesheet">
 
-    <script>
-      obja = {
-        name: "John",
-        age: 30,
-        car: null,
-      };
-      // JavaScript Objects
-      // name/key : value
-      // name/key不一定要是字串
-      // 但是在JSON格式裡name/key一定是字串
+  <!-- https://developer.mozilla.org/zh-TW/docs/Learn/JavaScript/Objects/JSON -->
 
-      let personName = obja.name;
-      let personAge = obja.age;
+  <style>
+    * {
+      font-family: 'Cherry Swash', cursive;
+      /* outline: 1px solid red; */
+    }
 
-      console.log(personName, personAge);
+    body {
+      width: 1000px;
+      height: 100vh;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
 
-      // ----------------------------------
+    /* button */
 
-      const txt = '{"name":"John", "age":30, "city":"New York"}';
-      const objb = JSON.parse(txt);
-      document.getElementById("demob").innerHTML = objb.name + ", " + objb.age;
+    button {
+      padding: 5px 10px;
+    }
+
+    /* header styles */
+
+    h1 {
+      font-size: 4rem;
+      text-align: center;
+    }
+
+    header p {
+      font-size: 1.3rem;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    /* section styles */
+
+    section {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    section p {
+      margin: 5px 0;
+    }
+
+    section ul {
+      margin-top: 0;
+    }
+
+    h2 {
+      font-size: 2rem;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #999999;
+    }
+  </style>
+</head>
+
+<body>
+
+  <button id="button" type="button" onclick="loadData()">Load Data</button>
+
+  <header></header>
+
+  <section></section>
+
+  <script>
+
+    var header = document.querySelector('header');
+    var section = document.querySelector('section');
+
+    // https://developer.mozilla.org/zh-TW/docs/Web/API/XMLHttpRequest
 
 
-    </script>
-  </body>
+    function loadData() {
+      var requestURL = './89.superhero.json';
+      var request = new XMLHttpRequest();
+      request.open('GET', requestURL);  // 開啟新的請求 
+      // 第一個參數放method(這邊使用GET) 第二個參數放請求目的地 也就是JSON檔的位置 
+      request.responseType = 'json';  // 回傳的方式(這邊用JSON)
+      request.send();  // 傳送請求
+
+      request.onload = function () {
+        var superHeroes = request.response;
+        populateHeader(superHeroes);
+        showHeroes(superHeroes);
+      }
+
+      document.getElementById("button").style.display = "none";
+      
+    }
+
+
+    function populateHeader(jsonObj) {
+      var myH1 = document.createElement('h1');
+      myH1.textContent = jsonObj['squadName'];
+      header.appendChild(myH1);
+
+      var myPara = document.createElement('p');
+      myPara.textContent = 'Hometown: ' + jsonObj['homeTown'] + ' // Formed: ' + jsonObj['formed'];
+      header.appendChild(myPara);
+    }
+
+
+    function showHeroes(jsonObj) {
+      var heroes = jsonObj['members'];
+
+      for (i = 0; i < heroes.length; i++) {
+        var myArticle = document.createElement('article');
+        var myH2 = document.createElement('h2');
+        var myPara1 = document.createElement('p');
+        var myPara2 = document.createElement('p');
+        var myPara3 = document.createElement('p');
+        var myList = document.createElement('ul');
+
+        myH2.textContent = heroes[i].name;
+        myPara1.textContent = 'Secret identity: ' + heroes[i].secretIdentity;
+        myPara2.textContent = 'Age: ' + heroes[i].age;
+        myPara3.textContent = 'Superpowers:';
+
+        var superPowers = heroes[i].powers;
+        for (j = 0; j < superPowers.length; j++) {
+          var listItem = document.createElement('li');
+          listItem.textContent = superPowers[j];
+          myList.appendChild(listItem);
+        }
+
+        myArticle.appendChild(myH2);
+        myArticle.appendChild(myPara1);
+        myArticle.appendChild(myPara2);
+        myArticle.appendChild(myPara3);
+        myArticle.appendChild(myList);
+
+        section.appendChild(myArticle);
+      }
+    }
+
+  </script>
+</body>
+
 </html>

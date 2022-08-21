@@ -49,6 +49,9 @@ function loadDoc1() {
 
 // The XMLHttpRequest object is used to request data from a server
 // 建立一個 XMLHttpRequest物件 去把別人的資料儲存在裡面
+// 雖然名字裡有XML 但可以儲存的資料類型並不一定要是XML
+
+// https://developer.mozilla.org/zh-TW/docs/Web/API/XMLHttpRequest
 
 // 四步驟
 // Create an XMLHttpRequest object  建立了一個XMLHttpRequest物件
