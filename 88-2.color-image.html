@@ -10,22 +10,54 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Margarine&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 
     <style>
+
+        * {
+            margin: 0 auto;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
             font: 1.6rem 'Margarine';
         }
 
         #mynetwork {
-            width: 800px;
-            height: 800px;
-            border: 1px solid lightgray;
+            width: 100vw;
+            height: 100vh;
+            /* border: 1px solid lightgray; */
             background-color: #333333;
+            background-size: cover;
         }
+
+        #form {
+            position: fixed;
+            top: 0;
+            z-index: 999;
+            display: flex;
+        }
+
+        input {
+            margin-right: 5px;
+        }
+
+        button {
+            padding-right: 10px;
+            padding-left: 10px;
+            letter-spacing: 0.1rem;
+            margin-right: 5px;
+        }
+        
     </style>
 
     <script type="text/javascript" src="./scripts/vis-network.min.js"></script>
+    <script src="./scripts/rvscolor.js"></script>
 
     <script type="text/javascript">
 
@@ -157,7 +189,16 @@
 <!-- Execute immediately after a page has been loaded -->
 <!-- https://www.w3schools.com/jsref/event_onload.asp -->
 
+
 <body onload="draw()">
+    <!-- <div id="change" onclick="showPanel()">
+        <i class="fa-solid fa-palette"></i>
+    </div>  -->
+    <form id="form">
+        <input type="color" oninput="myFunc(event)">
+        <button type="button" onclick="addImg()">Set Image</button>
+        <button type="reset" onclick="toReset()">Reset</button>
+    </form>
     <div id="mynetwork"></div>
 </body>
 

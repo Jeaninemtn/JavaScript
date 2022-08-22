@@ -10,11 +10,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Margarine&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+        integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 
     <style>
-
         * {
             margin: 0 auto;
             padding: 0;
@@ -53,16 +54,23 @@
             letter-spacing: 0.1rem;
             margin-right: 5px;
         }
-        
     </style>
+</head>
 
-    <script type="text/javascript" src="./scripts/vis-network.min.js"></script>
-    <script src="./scripts/rvscolor.js"></script>
+<body onload="draw()">
+    <form id="form">
+        <input type="color" oninput="myFunc(event)">
+        <button type="button" onclick="addImg()">Set Image</button>
+        <button type="reset" onclick="toReset()">Reset</button>
+    </form>
+    <div id="mynetwork"></div>
 
-    <script type="text/javascript">
+
+    <script src="./scripts/vis-network.min.js"></script>
+    <script>
 
         // https://github.com/visjs/vis-network
-        
+
         var DIR = "./img/";
         var nodes = null;
         var edges = null;
@@ -74,53 +82,15 @@
             // value corresponds with the age of the person
             var DIR = "./img/";
             nodes = [
-                // {
-                //     id: 1,
-                //     shape: "image",
-                //     image: DIR + "gateway.png",
-                //     // label: "useImageSize",
-                //     // shapeProperties: { useImageSize: true },
-                // },
-                // { id: 2, shape: "image", image: DIR + "gateway.png" },
-                // {
-                //     id: 3,
-                //     shape: "image",
-                //     image: DIR + "gateway.png",
-                //     // label: "imagePadding{2,10,8,20}+size",
-                //     // imagePadding: { left: 2, top: 10, right: 8, bottom: 20 },
-                //     // size: 40,
-                //     color: {
-                //         border: "green",
-                //         background: "yellow",
-                //         highlight: { border: "yellow", background: "green" },
-                //         hover: { border: "orange", background: "grey" },
-                //     },
-                // },
                 { id: 1, shape: "image", image: DIR + "gateway.png" },
                 { id: 2, shape: "image", image: DIR + "gateway.png" },
                 { id: 3, shape: "image", image: DIR + "gateway.png" },
                 { id: 4, shape: "image", image: DIR + "gateway.png" },
-
                 { id: 5, shape: "image", image: DIR + "gateway.png" },
                 { id: 6, shape: "image", image: DIR + "gateway.png" },
                 { id: 7, shape: "image", image: DIR + "gateway.png" },
                 { id: 8, shape: "image", image: DIR + "gateway.png" },
                 { id: 9, shape: "image", image: DIR + "gateway.png" },
-
-                // {
-                //     id: 9,
-                //     shape: "image",
-                //     image: DIR + "gateway.png",
-                //     // label: "useImageSize + imagePadding:15",
-                //     // shapeProperties: { useImageSize: true },
-                //     // imagePadding: 30,
-                //     color: {
-                //         border: "blue",
-                //         background: "orange",
-                //         highlight: { border: "orange", background: "blue" },
-                //         hover: { border: "orange", background: "grey" },
-                //     },
-                // },
                 { id: 10, shape: "image", image: DIR + "gateway.png" },
                 { id: 11, shape: "image", image: DIR + "gateway.png" },
                 { id: 12, shape: "image", image: DIR + "gateway.png" },
@@ -129,8 +99,6 @@
 
             ];
 
-            // create connections between people
-            // value corresponds with the amount of contact between two people
             edges = [
                 { from: 1, to: 2 },
                 { from: 2, to: 3 },
@@ -183,23 +151,45 @@
             };
             network = new vis.Network(container, data, options);
         }
+
+        // -------------------------------------
+
+        function myFunc(ev) {
+            selectedColor = document.querySelector('input[type="color"]') ? document.querySelector('input[type="color"]').value : 0;
+            // console.log(selectedColor);
+
+            // 把顏色轉成rgb形式 (原先是16進位)
+            const color = ev.target.value
+            const r = parseInt(color.substr(1, 2), 16)
+            const g = parseInt(color.substr(3, 2), 16)
+            const b = parseInt(color.substr(5, 2), 16)
+            // console.log(`${r}, ${g}, ${b}`);
+
+            selectedColor = [r, g, b];
+
+            document.getElementById("mynetwork").style.backgroundColor = "rgb" + "(" + selectedColor.toString() + ")";
+
+            // 開始抓對比色
+            const br = 255 - r;
+            const bg = 255 - g;
+            const bb = 255 - b;
+            rvsColor = [br, bg, bb];
+            // console.log(rvsColor);
+            console.log( "rgb" + "(" + rvsColor.toString() + ")");
+
+        }
+
+        function addImg() {
+            document.getElementById("mynetwork").style.backgroundImage = "url('./img/ocean.jpg')";
+        }
+
+        function toReset() {
+            document.getElementById('form').reset();
+            document.getElementById("mynetwork").style.backgroundImage = "none";
+            document.getElementById("mynetwork").style.backgroundColor = "#ffffff";
+        }
+
     </script>
-</head>
-
-<!-- Execute immediately after a page has been loaded -->
-<!-- https://www.w3schools.com/jsref/event_onload.asp -->
-
-
-<body onload="draw()">
-    <!-- <div id="change" onclick="showPanel()">
-        <i class="fa-solid fa-palette"></i>
-    </div>  -->
-    <form id="form">
-        <input type="color" oninput="myFunc(event)">
-        <button type="button" onclick="addImg()">Set Image</button>
-        <button type="reset" onclick="toReset()">Reset</button>
-    </form>
-    <div id="mynetwork"></div>
 </body>
 
 </html>
