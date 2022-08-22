@@ -97,6 +97,9 @@
             if ( R == G && R == B && G == B) {
                 boX.style.color = resBgColor(rgbArr);
                 boX.style.borderColor = resBgColor(rgbArr);
+                document.body.style.backgroundColor = "rgb" + "(" + rgbArr.toString() + ")";
+                labelColorGray();
+
             } else {  // 背景不是灰色調
                 // border顏色 找出背景色的對比色
                 rR = 255 - R;
@@ -107,6 +110,8 @@
                 // 把它組起來變成RGB (=BOX的border色)
                 boX.style.borderColor = "rgb" + "(" + rvsRGB.toString() + ")";
                 boX.style.color = "rgb" + "(" + rvsRGB.toString() + ")";
+                document.body.style.backgroundColor = "rgb" + "(" + rgbArr.toString() + ")";
+                labelColorRan();
                 }
         }
 
@@ -119,7 +124,23 @@
             // 如果顏色是深色 就回傳 #fff
         }
 
+        var labels = document.querySelectorAll('label');
 
+        // label的顏色 when 灰色調
+        function labelColorGray() {
+            [].forEach.call(labels, function(label) {
+                label.style.color = resBgColor(rgbArr);
+                });
+        }
+
+        // 不是灰色調
+        function labelColorRan() {
+            [].forEach.call(labels, function(label) {
+                label.style.color = "rgb" + "(" + rvsRGB.toString() + ")";
+                });
+        }
+
+        
         // 抓對比色
 
         // https://blog.csdn.net/chelen_jak/article/details/108470321
