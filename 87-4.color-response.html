@@ -10,13 +10,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Lemon&display=swap" rel="stylesheet">
     <title>color response</title>
     <style>
-
         * {
             padding: 0;
             margin: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             display: flex;
             height: 100vh;
@@ -24,7 +23,7 @@
             align-items: center;
         }
 
-        .input-box{
+        .input-box {
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -42,12 +41,12 @@
             /* background-color: #aaf; */
             margin-top: 10px;
         }
+
         #text {
             font-family: 'Lemon', cursive;
             letter-spacing: 0.2rem;
             text-indent: 0.2rem;
         }
-
     </style>
 </head>
 
@@ -63,7 +62,7 @@
     <script>
 
         // 用input color去選背景色 + 自動挑對比色填入框框
-        
+
         function myFunc(ev) {
             selectedColor = document.querySelector('input[type="color"]') ? document.querySelector('input[type="color"]').value : 0;
             // console.log(selectedColor);
@@ -73,24 +72,39 @@
             const r = parseInt(color.substr(1, 2), 16)
             const g = parseInt(color.substr(3, 2), 16)
             const b = parseInt(color.substr(5, 2), 16)
-            // console.log(`${r}, ${g}, ${b}`);
+            console.log(`${r}, ${g}, ${b}`);
 
             selectedColor = [r, g, b];
 
             var Body = document.getElementsByTagName("BODY")[0];
             Body.style.backgroundColor = "rgb" + "(" + selectedColor.toString() + ")";
 
-            // 開始抓對比色
-            const br = 255 - r;
-            const bg = 255 - g;
-            const bb = 255 - b;
-            rvsColor = [br, bg, bb];
-            // console.log(rvsColor);
+            // 如果背景色是灰色調 (抓不到對比色)
+            if (r == g && r == b && g == b) {
+                document.getElementById('text').style.color = resBgColor(selectedColor);
+                document.getElementById('box').style.borderColor = resBgColor(selectedColor);
+            } else {
+                // 開始抓對比色
+                const br = 255 - r;
+                const bg = 255 - g;
+                const bb = 255 - b;
+                rvsColor = [br, bg, bb];
+                // console.log(rvsColor);
 
-            document.getElementById('text').style.color = "rgb" + "(" + rvsColor.toString() + ")";
-            document.getElementById('box').style.borderColor = "rgb" + "(" + rvsColor.toString() + ")";
+                document.getElementById('text').style.color = "rgb" + "(" + rvsColor.toString() + ")";
+                document.getElementById('box').style.borderColor = "rgb" + "(" + rvsColor.toString() + ")";
+            }
         }
-        
+
+        // 背景色是灰色調的時候要執行的判斷深淺的func
+        function resBgColor(selectedColor) {
+            var color = 0.213 * selectedColor[0] + 0.715 * selectedColor[1] + 0.072 * selectedColor[2] > 255 / 2;
+            return color ? '#000000' : '#ffffff'
+
+            // 如果是淺色 就回傳 #000
+            // 如果顏色是深色 就回傳 #fff
+        }
+
     </script>
 </body>
 
