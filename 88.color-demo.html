@@ -72,30 +72,37 @@
         // https://github.com/visjs/vis-network
         // https://visjs.github.io/vis-network/docs/network/nodes.html
 
+
         var DIR = "./img/";
         var nodes = null;
         var edges = null;
         var network = null;
 
+        
         // Called when the Visualization API is loaded.
         function draw() {
-            var DIR = "./img/";
+            DIR = "./img/gateway.png";
             nodes = [
-                { id: 1, shape: "circularImage", image: DIR + "gateway.png" },
-                { id: 2, shape: "image", image: DIR + "gateway.png" },
-                { id: 3, shape: "image", image: DIR + "gateway.png" },
-                { id: 4, shape: "image", image: DIR + "gateway.png" },
-                { id: 5, shape: "image", image: DIR + "gateway.png" },
-                { id: 6, shape: "image", image: DIR + "gateway.png" },
-                { id: 7, shape: "image", image: DIR + "gateway.png" },
-                { id: 8, shape: "image", image: DIR + "gateway.png" },
-                { id: 9, shape: "image", image: DIR + "gateway.png" },
-                { id: 10, shape: "image", image: DIR + "gateway.png" },
-                { id: 11, shape: "image", image: DIR + "gateway.png" },
-                { id: 12, shape: "image", image: DIR + "gateway.png" },
-                { id: 13, shape: "image", image: DIR + "gateway.png" },
-                { id: 14, shape: "image", image: DIR + "gateway.png" },
+                { id: 1, shape: "circularImage", image: DIR },
+                { id: 2, shape: "image", image: DIR },
+                { id: 3, shape: "image", image: DIR },
+                { id: 4, shape: "image", image: DIR },
+                { id: 5, shape: "image", image: DIR },
+                { id: 6, shape: "image", image: DIR },
+                { id: 7, shape: "image", image: DIR },
+                { id: 8, shape: "image", image: DIR },
+                { id: 9, shape: "circularImage", image: DIR },
+                { id: 10, shape: "image", image: DIR },
+                { id: 11, shape: "circularImage", image: DIR },
+                { id: 12, shape: "image", image: DIR },
+                { id: 13, shape: "image", image: DIR },
+                { id: 14, shape: "image", image: DIR },
             ];
+
+            // 原本的DIR長醬子 但因為我的圖片都一樣 所以我直接改成圖片的url
+            // DIR = "./img/
+            // { id: 14, shape: "image", image: DIR + "gateway.png" }
+            // 不要忘記這ㄍ寫法
 
             edges = [
                 { from: 1, to: 2 },
@@ -116,27 +123,25 @@
             ];
 
             // create a network
-            var container = document.getElementById("mynetwork");
-            var data = {
+
+            container = document.getElementById("mynetwork");
+
+            data = {
                 nodes: nodes,
                 edges: edges,
             };
 
-            var options = {
+            options = {
                 nodes: {
                     borderWidth: 4,
                     borderWidthSelected: 6,
                     size: 24,
                     color: {
-                        border: "transparent",
+                        border: "green",
                         background: "transparent",
                         highlight: {
-                            border: "black",
+                            border: "pink",
                             background: "white",
-                        },
-                        hover: {
-                            border: "orange",
-                            background: "grey",
                         },
                     },
                     // color : {myNODEcolor_OBJ
@@ -154,7 +159,7 @@
             // 把color的部分另外寫出來
 
             // options.nodes.color.border = "pink";
-            options.nodes.color.border = myBorderColor();
+            // options.nodes.color.highlight.border = myBorderColor();
 
             // 這邊寫法不知道為啥doesn't work
 
@@ -171,7 +176,7 @@
             //     }
             // }
 
-            // myNODEcolor_OBJ.highlight.border = 
+            // myNODEcolor_OBJ.highlight.border = "pink";
 
             // -------------------------------------
 
@@ -180,6 +185,7 @@
 
         // -------------------------------------
 
+    
         // 填背景色function
         function myFunc(ev) {
             // 把顏色轉成rgb形式 (原先是16進位)
@@ -191,14 +197,15 @@
 
             selectedColor = [r, g, b];
             document.getElementById("mynetwork").style.backgroundColor = "rgb" + "(" + selectedColor.toString() + ")";
-
-            // myBorderColor();
         }
 
+
+        document.querySelector('input[type="color"]').addEventListener("change" , myBorderColor);
+
+
         // 抓對比色填border function
-        function myBorderColor(e) {
+        function myBorderColor() {
             bgColor = document.querySelector('input[type="color"]') ? document.querySelector('input[type="color"]').value : 0;
-           
             const r = parseInt(bgColor.substr(1, 2), 16);
             const g = parseInt(bgColor.substr(3, 2), 16);
             const b = parseInt(bgColor.substr(5, 2), 16);
@@ -207,23 +214,35 @@
             const br = 255 - r;
             const bg = 255 - g;
             const bb = 255 - b;
+
             rvsColor = [br, bg, bb];
+
             rvsColorString = "rgb" + "(" + rvsColor.toString() + ")";
             console.log(rvsColorString);
 
-            return rvsColorString ? rvsColorString : 0;
+            options.nodes.color.border = rvsColorString;
+        
+            // return rvsColorString ? rvsColorString : 0;
         }
 
+
+        // 換背景圖
         function addImg() {
             document.getElementById("mynetwork").style.backgroundImage = "url('./img/ocean.jpg')";
         }
 
+
+        // reset
         function toReset() {
             document.getElementById('form').reset();
             document.getElementById("mynetwork").style.backgroundImage = "none";
             document.getElementById("mynetwork").style.backgroundColor = "#ffffff";
         }
 
+
+        // https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Operators/new
+
+        
     </script>
 </body>
 
