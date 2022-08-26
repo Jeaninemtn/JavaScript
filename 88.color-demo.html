@@ -81,7 +81,7 @@
         function draw() {
             var DIR = "./img/";
             nodes = [
-                { id: 1, shape: "image", image: DIR + "gateway.png" },
+                { id: 1, shape: "circularImage", image: DIR + "gateway.png" },
                 { id: 2, shape: "image", image: DIR + "gateway.png" },
                 { id: 3, shape: "image", image: DIR + "gateway.png" },
                 { id: 4, shape: "image", image: DIR + "gateway.png" },
@@ -121,9 +121,10 @@
                 nodes: nodes,
                 edges: edges,
             };
+
             var options = {
                 nodes: {
-                    borderWidth: 2,
+                    borderWidth: 4,
                     borderWidthSelected: 6,
                     size: 24,
                     color: {
@@ -138,6 +139,8 @@
                             background: "grey",
                         },
                     },
+                    // color : {myNODEcolor_OBJ
+                    // },
                     font: { color: "#eeeeee" },
                     shapeProperties: {
                         useBorderWithImage: true,
@@ -147,34 +150,68 @@
                     color: "lightgray",
                 },
             };
+
+            // 把color的部分另外寫出來
+
+            // options.nodes.color.border = "pink";
+            options.nodes.color.border = myBorderColor();
+
+            // 這邊寫法不知道為啥doesn't work
+
+            // var myNODEcolor_OBJ = {
+            //     border: "transparent",
+            //     background: "transparent",
+            //     highlight: {
+            //         border: "black",
+            //         background: "white",
+            //     },
+            //     hover: {
+            //         border: "orange",
+            //         background: "grey",
+            //     }
+            // }
+
+            // myNODEcolor_OBJ.highlight.border = 
+
+            // -------------------------------------
+
             network = new vis.Network(container, data, options);
         }
 
         // -------------------------------------
 
+        // 填背景色function
         function myFunc(ev) {
-            selectedColor = document.querySelector('input[type="color"]') ? document.querySelector('input[type="color"]').value : 0;
-            // console.log(selectedColor);
-
             // 把顏色轉成rgb形式 (原先是16進位)
             const color = ev.target.value
-            const r = parseInt(color.substr(1, 2), 16)
-            const g = parseInt(color.substr(3, 2), 16)
-            const b = parseInt(color.substr(5, 2), 16)
+            const r = parseInt(color.substr(1, 2), 16);
+            const g = parseInt(color.substr(3, 2), 16);
+            const b = parseInt(color.substr(5, 2), 16);
             // console.log(`${r}, ${g}, ${b}`);
 
             selectedColor = [r, g, b];
-
             document.getElementById("mynetwork").style.backgroundColor = "rgb" + "(" + selectedColor.toString() + ")";
+
+            // myBorderColor();
+        }
+
+        // 抓對比色填border function
+        function myBorderColor(e) {
+            bgColor = document.querySelector('input[type="color"]') ? document.querySelector('input[type="color"]').value : 0;
+           
+            const r = parseInt(bgColor.substr(1, 2), 16);
+            const g = parseInt(bgColor.substr(3, 2), 16);
+            const b = parseInt(bgColor.substr(5, 2), 16);
 
             // 開始抓對比色
             const br = 255 - r;
             const bg = 255 - g;
             const bb = 255 - b;
             rvsColor = [br, bg, bb];
-            // console.log(rvsColor);
-            // console.log( "rgb" + "(" + rvsColor.toString() + ")");
+            rvsColorString = "rgb" + "(" + rvsColor.toString() + ")";
+            console.log(rvsColorString);
 
+            return rvsColorString ? rvsColorString : 0;
         }
 
         function addImg() {
