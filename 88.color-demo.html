@@ -137,7 +137,7 @@
                     borderWidthSelected: 6,
                     size: 24,
                     color: {
-                        border: "green",
+                        border: "transparent",
                         background: "transparent",
                         highlight: {
                             border: "pink",
@@ -198,6 +198,7 @@
             selectedColor = [r, g, b];
             document.getElementById("mynetwork").style.backgroundColor = "rgb" + "(" + selectedColor.toString() + ")";
 
+            myBorderColor();
         }
 
 
@@ -216,11 +217,11 @@
             rvsColor = [br, bg, bb];
 
             rvsColorString = "rgb" + "(" + rvsColor.toString() + ")";
-            console.log(rvsColorString);
+            // console.log(rvsColorString);
 
-            // options.nodes.color.border = rvsColorString;
-        
+            options.nodes.color.border = rvsColorString;
             // return rvsColorString ? rvsColorString : 0;
+
         }
 
 
