@@ -72,11 +72,14 @@
         // https://github.com/visjs/vis-network
         // https://visjs.github.io/vis-network/docs/network/nodes.html
 
-
+        var VIS = null;
         var DIR = "./img/";
         var nodes = null;
         var edges = null;
         var network = null;
+        var container = null;
+        var data = null;
+        var options = null;
 
         
         // Called when the Visualization API is loaded.
@@ -179,7 +182,7 @@
             // myNODEcolor_OBJ.highlight.border = "pink";
 
             // -------------------------------------
-
+            
             network = new vis.Network(container, data, options);
         }
 
@@ -220,7 +223,14 @@
             // console.log(rvsColorString);
 
             options.nodes.color.border = rvsColorString;
+            options.edges.color = rvsColorString;
+            options.nodes.color.highlight.border = rvsColorString;
+            options.nodes.color.highlight.background = "#ffffff";
+
             // return rvsColorString ? rvsColorString : 0;
+
+            // 去看一下redraw()
+            network = new vis.Network(container, data, options);
 
         }
 
