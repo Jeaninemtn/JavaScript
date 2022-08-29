@@ -13,6 +13,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
         integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./css/examples.css">
+
+    <script src="./scripts/background-check.min.js"></script>
+
+    <script src="./scripts/drag.js"></script>
+    <script src="./scripts/main.js"></script>
 
 
     <style>
@@ -63,8 +69,11 @@
         <button type="button" onclick="addImg()">Set Image</button>
         <button type="reset" onclick="toReset()">Reset</button>
     </form>
-    <div id="mynetwork"></div>
-
+    <div class="demo">
+        <div class="demo-images">
+            <div id="mynetwork"></div>
+        </div>
+    </div>
 
     <script src="./scripts/vis-network.min.js"></script>
     <script>
@@ -81,7 +90,7 @@
         var data = null;
         var options = null;
 
-        
+
         // Called when the Visualization API is loaded.
         function draw() {
             DIR = "./img/gateway.png";
@@ -101,11 +110,6 @@
                 { id: 13, shape: "image", image: DIR },
                 { id: 14, shape: "image", image: DIR },
             ];
-
-            // 原本的DIR長醬子 但因為我的圖片都一樣 所以我直接改成圖片的url
-            // DIR = "./img/
-            // { id: 14, shape: "image", image: DIR + "gateway.png" }
-            // 不要忘記這ㄍ寫法
 
             edges = [
                 { from: 1, to: 2 },
@@ -141,7 +145,7 @@
                     size: 24,
                     color: {
                         border: "transparent",
-                        background: "transparent",
+                        background: "#d2d2d2c8",
                         highlight: {
                             border: "pink",
                             background: "white",
@@ -159,36 +163,12 @@
                 },
             };
 
-            // 把color的部分另外寫出來
-
-            // options.nodes.color.border = "pink";
-            // options.nodes.color.highlight.border = myBorderColor();
-
-            // 這邊寫法不知道為啥doesn't work
-
-            // var myNODEcolor_OBJ = {
-            //     border: "transparent",
-            //     background: "transparent",
-            //     highlight: {
-            //         border: "black",
-            //         background: "white",
-            //     },
-            //     hover: {
-            //         border: "orange",
-            //         background: "grey",
-            //     }
-            // }
-
-            // myNODEcolor_OBJ.highlight.border = "pink";
-
-            // -------------------------------------
-            
             network = new vis.Network(container, data, options);
         }
 
         // -------------------------------------
 
-    
+
         // 填背景色function
         function myFunc(ev) {
             // 把顏色轉成rgb形式 (原先是16進位)
@@ -201,43 +181,29 @@
             selectedColor = [r, g, b];
             document.getElementById("mynetwork").style.backgroundColor = "rgb" + "(" + selectedColor.toString() + ")";
 
-            myBorderColor();
-        }
-
-
-        // 抓對比色填border function
-        function myBorderColor() {
-            bgColor = document.querySelector('input[type="color"]') ? document.querySelector('input[type="color"]').value : 0;
-            const r = parseInt(bgColor.substr(1, 2), 16);
-            const g = parseInt(bgColor.substr(3, 2), 16);
-            const b = parseInt(bgColor.substr(5, 2), 16);
-
-            // 開始抓對比色
-            const br = 255 - r;
-            const bg = 255 - g;
-            const bb = 255 - b;
-
-            rvsColor = [br, bg, bb];
-
-            rvsColorString = "rgb" + "(" + rvsColor.toString() + ")";
-            // console.log(rvsColorString);
-
-            options.nodes.color.border = rvsColorString;
-            options.edges.color = rvsColorString;
-            options.nodes.color.highlight.border = rvsColorString;
+            options.nodes.color.border = resBgColor(selectedColor);
+            options.edges.color = resBgColor(selectedColor);
+            options.nodes.color.highlight.border = resBgColor(selectedColor);
             options.nodes.color.highlight.background = "#ffffff";
 
-            // return rvsColorString ? rvsColorString : 0;
-
-            // 去看一下redraw()
             network = new vis.Network(container, data, options);
-
         }
 
+        // 判斷背景顏色深淺
+        function resBgColor(selectedColor) {
+            // 當color值大於128時 color值偏向255 即#ffffff (偏淺色)
+            // 此時字體顏色應為 黑色=#000000
+            // 當color值小於128時 color值偏向0 即#000000 (偏深色)
+            // 此時字體颜色應為 白色=#ffffff
+            var color = 0.213 * selectedColor[0] + 0.715 * selectedColor[1] + 0.072 * selectedColor[2] > 255 / 2;
+            return color ? '#000000' : '#ffffff'
+        }
 
         // 換背景圖
         function addImg() {
             document.getElementById("mynetwork").style.backgroundImage = "url('./img/ocean.jpg')";
+
+            draw();
         }
 
 
@@ -246,13 +212,30 @@
             document.getElementById('form').reset();
             document.getElementById("mynetwork").style.backgroundImage = "none";
             document.getElementById("mynetwork").style.backgroundColor = "#ffffff";
+
+            draw();
+
         }
 
 
         // https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Operators/new
 
-        
+
     </script>
+
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-18542897-1']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+
 </body>
 
 </html>
+

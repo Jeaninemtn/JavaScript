@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Margarine&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css"
+        integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+    <style>
+        * {
+            margin: 0 auto;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            font: 1.6rem 'Margarine';
+        }
+
+        #mynetwork {
+            width: 100vw;
+            height: 100vh;
+            /* border: 1px solid lightgray; */
+            background-color: #333333;
+            background-size: cover;
+        }
+
+        #form {
+            position: fixed;
+            top: 0;
+            z-index: 999;
+            display: flex;
+        }
+
+        input {
+            margin-right: 5px;
+        }
+
+        button {
+            padding-right: 10px;
+            padding-left: 10px;
+            letter-spacing: 0.1rem;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+
+<body onload="draw()">
+    <form id="form">
+        <input type="color" oninput="myFunc(event)">
+        <button type="button" onclick="addImg()">Set Image</button>
+        <button type="reset" onclick="toReset()">Reset</button>
+    </form>
+    <div id="mynetwork"></div>
+
+
+    <script src="./scripts/vis-network.min.js"></script>
+    <script>
+
+        // https://github.com/visjs/vis-network
+        // https://visjs.github.io/vis-network/docs/network/nodes.html
+
+        var VIS = null;
+        var DIR = "./img/";
+        var nodes = null;
+        var edges = null;
+        var network = null;
+        var container = null;
+        var data = null;
+        var options = null;
+
+        
+        // Called when the Visualization API is loaded.
+        function draw() {
+            DIR = "./img/gateway.png";
+            nodes = [
+                { id: 1, shape: "circularImage", image: DIR },
+                { id: 2, shape: "image", image: DIR },
+                { id: 3, shape: "image", image: DIR },
+                { id: 4, shape: "image", image: DIR },
+                { id: 5, shape: "image", image: DIR },
+                { id: 6, shape: "image", image: DIR },
+                { id: 7, shape: "image", image: DIR },
+                { id: 8, shape: "image", image: DIR },
+                { id: 9, shape: "circularImage", image: DIR },
+                { id: 10, shape: "image", image: DIR },
+                { id: 11, shape: "circularImage", image: DIR },
+                { id: 12, shape: "image", image: DIR },
+                { id: 13, shape: "image", image: DIR },
+                { id: 14, shape: "image", image: DIR },
+            ];
+
+            // 原本的DIR長醬子 但因為我的圖片都一樣 所以我直接改成圖片的url
+            // DIR = "./img/
+            // { id: 14, shape: "image", image: DIR + "gateway.png" }
+            // 不要忘記這ㄍ寫法
+
+            edges = [
+                { from: 1, to: 2 },
+                { from: 2, to: 3 },
+                { from: 2, to: 4 },
+                { from: 4, to: 5 },
+                { from: 4, to: 10 },
+                { from: 4, to: 6 },
+                { from: 6, to: 7 },
+                { from: 7, to: 8 },
+                { from: 8, to: 9 },
+                { from: 8, to: 10 },
+                { from: 10, to: 11 },
+                { from: 11, to: 12 },
+                { from: 12, to: 13 },
+                { from: 13, to: 14 },
+                { from: 9, to: 16 },
+            ];
+
+            // create a network
+
+            container = document.getElementById("mynetwork");
+
+            data = {
+                nodes: nodes,
+                edges: edges,
+            };
+
+            options = {
+                nodes: {
+                    borderWidth: 4,
+                    borderWidthSelected: 6,
+                    size: 24,
+                    color: {
+                        border: "transparent",
+                        background: "transparent",
+                        highlight: {
+                            border: "pink",
+                            background: "white",
+                        },
+                    },
+                    // color : {myNODEcolor_OBJ
+                    // },
+                    font: { color: "#eeeeee" },
+                    shapeProperties: {
+                        useBorderWithImage: true,
+                    },
+                },
+                edges: {
+                    color: "lightgray",
+                },
+            };
+
+            // 把color的部分另外寫出來
+
+            // options.nodes.color.border = "pink";
+            // options.nodes.color.highlight.border = myBorderColor();
+
+            // 這邊寫法不知道為啥doesn't work
+
+            // var myNODEcolor_OBJ = {
+            //     border: "transparent",
+            //     background: "transparent",
+            //     highlight: {
+            //         border: "black",
+            //         background: "white",
+            //     },
+            //     hover: {
+            //         border: "orange",
+            //         background: "grey",
+            //     }
+            // }
+
+            // myNODEcolor_OBJ.highlight.border = "pink";
+
+            // -------------------------------------
+            
+            network = new vis.Network(container, data, options);
+        }
+
+        // -------------------------------------
+
+    
+        // 填背景色function
+        function myFunc(ev) {
+            // 把顏色轉成rgb形式 (原先是16進位)
+            const color = ev.target.value
+            const r = parseInt(color.substr(1, 2), 16);
+            const g = parseInt(color.substr(3, 2), 16);
+            const b = parseInt(color.substr(5, 2), 16);
+            // console.log(`${r}, ${g}, ${b}`);
+
+            selectedColor = [r, g, b];
+            document.getElementById("mynetwork").style.backgroundColor = "rgb" + "(" + selectedColor.toString() + ")";
+
+            myBorderColor();
+        }
+
+
+        // 抓對比色填border function
+        function myBorderColor() {
+            bgColor = document.querySelector('input[type="color"]') ? document.querySelector('input[type="color"]').value : 0;
+            const r = parseInt(bgColor.substr(1, 2), 16);
+            const g = parseInt(bgColor.substr(3, 2), 16);
+            const b = parseInt(bgColor.substr(5, 2), 16);
+
+            // 開始抓對比色
+            const br = 255 - r;
+            const bg = 255 - g;
+            const bb = 255 - b;
+
+            rvsColor = [br, bg, bb];
+
+            rvsColorString = "rgb" + "(" + rvsColor.toString() + ")";
+            // console.log(rvsColorString);
+
+            options.nodes.color.border = rvsColorString;
+            options.edges.color = rvsColorString;
+            options.nodes.color.highlight.border = rvsColorString;
+            options.nodes.color.highlight.background = "#ffffff";
+
+            // return rvsColorString ? rvsColorString : 0;
+
+            // 去看一下redraw()
+            network = new vis.Network(container, data, options);
+
+        }
+
+
+        // 換背景圖
+        function addImg() {
+            document.getElementById("mynetwork").style.backgroundImage = "url('./img/ocean.jpg')";
+
+            draw();
+        }
+
+
+        // reset
+        function toReset() {
+            document.getElementById('form').reset();
+            document.getElementById("mynetwork").style.backgroundImage = "none";
+            document.getElementById("mynetwork").style.backgroundColor = "#ffffff";
+
+            draw();
+
+        }
+
+
+        // https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Operators/new
+
+        
+    </script>
+</body>
+
+</html>
