@@ -4024,15 +4024,12 @@
         // 填背景色function
         function myFunc(ev) {
             // 把顏色轉成rgb形式 (原先是16進位)
-        
-            const color = ev.target.value
-
+            const color = bg_color.value
             const r = parseInt(bg_color.substr(1, 2), 16);
             const g = parseInt(bg_color.substr(3, 2), 16);
             const b = parseInt(bg_color.substr(5, 2), 16);
             console.log(`${r}, ${g}, ${b}`);
 
-            rgb_bg_color = [r, g, b];
 
             // options.nodes.color.border = resBgColor(bg_color);
             // options.edges.color = resBgColor(bg_color);
