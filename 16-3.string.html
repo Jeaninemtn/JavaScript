@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>padStart()</title>
+  </head>
+  <body>
+
+    <p id="demoA"></p>
+    <p id="demoB"></p>
+    <p id="demoC"></p>
+
+    <script>
+
+        // padStart()
+        // syntax -> str.padStart(targetLength, padString)
+        // targetLength=預計要填充到的字串長度
+        // padString=要用什麼字串來填充(optional) 沒有填寫的話就會用空白去填
+        // example:
+
+        var textA = "abc".padStart(10);  
+        console.log(textA);  // "       abc"  console.log印得出來
+        document.getElementById('demoA').innerHTML = textA;  // "abc" 空白會被吃掉
+
+        var textB = "abc".padStart(10, "foo");   // "foofoofabc"
+        document.getElementById('demoB').innerHTML = textB;  
+
+        var textC = "abc".padStart(6, "123465");  // "123abc"
+        document.getElementById('demoC').innerHTML = textC; 
+
+        //  https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Global_Objects/String/padStart
+
+
+    </script>
+  </body>
+</html>

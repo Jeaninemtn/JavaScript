@@ -183,13 +183,13 @@
 
     #logo {
         height: 110px;
-        #max-width: 50%;
+        max-width: 50%;
     }
 
     #mynetwork {
         width: 0;
         height: 0;
-        #border: none;
+        border: none;
         border: 1px solid black;
         top: 60;
         left: 0;
@@ -465,7 +465,21 @@
         return true;
     }
 
+      
+    // ------------------------------------------------
+
+    // TODO: 搞懂這行在幹嘛
+
+    // zeroPad是一個function 執行後會回傳字串(箭頭後面那串)
     const zeroPad = (num, places) => String(num).padStart(places, '0')
+
+    // padStart()
+    // syntax -> str.padStart(targetLength, padString)
+    // targetLength=預計要填充到的字串長度
+    // padString=要用什麼字串來填充(optional) 沒有填寫的話就會用空白去填
+
+    // ------------------------------------------------
+
 
     function str2hex(str) {
         var arr1 = [];
@@ -562,8 +576,19 @@
                     szAddParentMAC = szAddParentMAC.toLowerCase();
                     if (szAddParentMAC == local_mac)
                         szAddParentMAC = "000000000000";
+
+
+                    // ------------------------------------------------
+
+                    // AddParentPort在dropdownlist裡面
+                    // 就是hover device的時候會出現的那條list
+
                     var szAddParentPort = zeroPad(document.getElementById("AddParentPort").value, 2);
                     var szAddLocalPort = zeroPad(document.getElementById("AddLocalPort").value, 2);
+
+                    // ------------------------------------------------
+
+
                     var szAddPingCheck = "0";
                     if (document.getElementById("AddPingCheck").checked)
                         szAddPingCheck = "1";
@@ -724,6 +749,11 @@
 
     }
 
+
+    // ------------------------------------------------
+
+    // 這個function就是會跳去設定背景的那頁
+        
     function BG_Setting() {
 
         //window.location.href = 'bg_setting.htm';
@@ -732,6 +762,9 @@
             '_blank' // <- This is what makes it open in a new window.
         );
     }
+
+    // ------------------------------------------------
+
 
     function SNMP() {
 
@@ -751,7 +784,11 @@
     }
 
 
+    // ------------------------------------------------
 
+
+    // document.ready()=等DOM完成載入就執行的function
+    // 不會等resource載入while body onload event會等
 
     $(document).ready(function () {
         //$('#bg_img').click(function() {
@@ -780,6 +817,15 @@
 
     });
 
+
+    // ------------------------------------------------
+
+
+    // 喔喔 喔 喔喔喔喔 喔 喔   喔   喔    喔
+
+    // TODO:搞懂這個
+    // The ajax() method is used to perform an AJAX (asynchronous HTTP) request
+
     function InitFilterList() {
         let ajax_snmp = jQuery.ajax({
             url: '/webctrl/TopologyMap/GetMacList?csrf_token=' + csrf_token,
@@ -788,7 +834,7 @@
         });
 
 
-        jQuery.when(ajax_snmp)
+        jQuery.when(ajax_snmp)  // when裡面塞一個function(callback function)
             .done(function (result) {
                 if (result) {
                     let json_result = JSON.parse(result);
@@ -807,6 +853,10 @@
                 Alert('Filter List Initailize Failed!');
             });
     }
+
+
+    // ------------------------------------------------
+
 
     function RenderFilterOption(source) {
         let objList = document.getElementById('device_ip_list');
@@ -1494,6 +1544,9 @@
             <input id="Reload_Page" type="image" src="images/reload.png" onclick="fixZoom();" title="Reload Page"
                 width="23" height="23" disabled>
         </div>
+
+        <!-- 設定background的button在這 onclick event -->
+
         <div style="float:left;margin-top:5px;margin-left:10px;">
             <input id="Background" type="image" src="images/upload.png" title="Upload Background & Icon"
                 onclick="BG_Setting();" width="27" height="24">
@@ -1590,6 +1643,12 @@
            <input type="button" onclick="clusterByCid();" value="Show Port Group">
        </div>
        -->
+
+    
+    <!-- -------------------------------------------------->
+
+    <!-- iframe連發 顆-->
+
     <div style="float:left;margin-top:10px;margin-left:10px;display:none;">
         <iframe name=topology_set id=topology_set src="" width=0 height=0 frameborder=0 scrolling=no></iframe>
         <iframe name=topology_check id=topology_check src="" width=0 height=0 frameborder=0 scrolling=no></iframe>
@@ -1614,11 +1673,23 @@
         <iframe name=lldp_move_neighbor id=lldp_move_neighbor src="" width=0 height=0 frameborder=0
             scrolling=no></iframe>
     </div>
+
+    <!-- -------------------------------------------------->
+
+
+
     </div>
+
+
+
     <script>
         var w = window.innerWidth - 75;
         document.getElementById("frame_icon").style.marginLeft = w.toString() + 'px';
     </script>
+
+
+
+
     <div id="messeage_div"
         style="display:none;background-color:#C6D6DF;border-radius:20px;float:left;width:340px;height:200px;padding:0px;margin:0px;margin-top:75px;margin-left:10px;">
         <div id="frame_info"
@@ -1870,11 +1941,15 @@
         <a id=snmp_other_oid name=snmp_other_oid
             href="javascript: remote_device_action('snmp_other_oid', '23', mac_right_click);">Other OID</a>
     </div>
+
+
     <script type="text/javascript">
         document.getElementById("myDropdownAddIcon").style.display = "none";
         document.getElementById("myDropdownEditIcon").style.display = "none";
         document.getElementById("myDropdownMoveEdge").style.display = "none";
         document.getElementById("myDropdownSelectIcon").style.display = "none";
+
+
 
         function show_node_menu(ids_right_click, ids_right_click_edge) {
             var found = 0;
@@ -2152,7 +2227,17 @@
             }
             network.cluster(clusterOptionsByData);
         }
+        
+        
         //$("body").css("overflow", "hidden");
+        
+        
+        // ------------------------------------------------
+
+
+        // Network的東西來了
+        
+        
         var nodes, edges, network;
         var zoom_position = [];
         var scale_global;
@@ -2163,9 +2248,11 @@
         var edges_length = 150;
         var data;
 
+
         //新增判斷，控制edge text的顯示
         var temp_neighbor_with_host_port = "";
         var temp_neighbor_local_port = "";
+
 
         function edge_port_display(port_no) {
             if (port_no == -1 || port_no == 0)
@@ -2173,6 +2260,7 @@
             else
                 return port_no;
         }
+
 
         function createNetwork(easingType) {
             var local_img_str;
@@ -2598,6 +2686,10 @@
                     }
                 }
             }
+
+
+            // TODO: 搞懂這個
+
             nodes = new vis.DataSet(nodesArray);
             edges = new vis.DataSet(edgesArray);
 
@@ -2630,11 +2722,40 @@
                 }
             }
 
+
+
             var container = document.getElementById('mynetwork');
+
+
             data = {
                 nodes: nodes,
                 edges: edges
             };
+
+            // options = {
+            //     nodes: {
+            //         borderWidth: 4,
+            //         borderWidthSelected: 6,
+            //         size: 24,
+            //         color: {
+            //             border: "transparent",
+            //             background: "#d2d2d2c8",
+            //             highlight: {
+            //                 border: "pink",
+            //                 background: "white",
+            //             },
+            //         },
+            //         font: { color: "#eeeeee" },
+            //         shapeProperties: {
+            //             useBorderWithImage: true,
+            //         },
+            //     },
+            //     edges: {
+            //         color: "lightgray",
+            //     },
+            // };
+
+
             //if ((!lock_state)&&(topology_style==1))
             if (topology_style == 1) {
                 var options = {
@@ -2705,7 +2826,19 @@
                     },
                 };
             }
+
+
+            // ------------------------------------------------
+
+
+            // 把network畫出來
             network = new vis.Network(container, data, options);
+
+
+            // ------------------------------------------------
+
+
+
             network.once("beforeDrawing", function () {
                 network.focus(1, {
                     scale: 1
@@ -2722,7 +2855,11 @@
             //        }
             //    });
             //});
+
+
             var ids;
+
+
             network.on('click', function (properties) {
                 ids = properties.nodes;
                 //console.log("Click Node: ["+ids+"]");
@@ -2759,12 +2896,18 @@
                     }
                 }
             });
+
+
             network.on('oncontext', function (params) {
                 ids_right_click = this.getNodeAt(params.pointer.DOM);
                 ids_right_click_edge = this.getEdgeAt(params.pointer.DOM);
             });
+            
+            
             var doubleClickTime = 0;
             var threshold = 500;
+
+
             function onRightClick() {
                 var str = ids_right_click + "";
                 if ((rd == "rd") || (str == local_id.toString())) {
@@ -2779,6 +2922,7 @@
                 show_node_menu(ids_right_click, ids_right_click_edge);
                 window.event.returnValue = false;
             }
+            
             function onClick() {
                 var t0 = new Date();
                 if (t0 - doubleClickTime > threshold) {
@@ -2789,10 +2933,12 @@
                     }, threshold);
                 }
             }
+            
             function doOnClick() {
                 if (remote_set_processing())
                     return;
             }
+            
             function onDoubleClick() {
                 if (remote_set_processing())
                     return;
@@ -2824,9 +2970,13 @@
                     }
                 }
             }
+           
             network.on('click', onClick);
+            
             network.on('doubleClick', onDoubleClick);
+            
             network.on('oncontext', onRightClick);
+            
             /*
                         network.on("zoom",function() {
                                    if (remote_set_processing())
@@ -2868,6 +3018,7 @@
                             }
                         });
             */
+            
             network.on("dragStart", function (params) {
                 //console.log("dragStart: "+this.getNodeAt(params.pointer.DOM));
                 document.getElementById("myDropdownSetIP").style.display = "none";
@@ -2905,11 +3056,13 @@
                     }
                 }
             });
+            
             /*
                         network.on("dragging",function (params) {
                             //console.log("dragging:"+this.getNodeAt(params.pointer.DOM));
                                    });
             */
+            
             network.on("dragEnd", function (params) {
                 //console.log("dragEnd:"+this.getNodeAt(params.pointer.DOM));
                 if (lock_state) {
@@ -2973,15 +3126,22 @@
                                 network.fit();
                 */
             });
+            
+            
             //            network.fit();
             //setTimeout('close_physics()',1000);
+
+
             neighbor_mac_tmp = neighbor_mac;
             neighbor_alarm_info_tmp = neighbor_alarm_info;
             neighbor_multicast_remote_set_tmp = neighbor_multicast_remote_set;
             neighbor_ip_tmp = neighbor_ip;
         }
+        
+        
         //createNetwork("easeInCubic");
 
+        
         function close_physics() {
             var options = {
                 physics: {
@@ -3284,8 +3444,13 @@
             }
         }
 
+
+        // ------------------------------------------------
+        
+        // 跟背景有關ㄉ
+
         function page_background_change() {
-            var table_body = document.getElementById("table_body");
+            var table_body = document.getElementById("table_body");  // 就是在說body
             if (ems_radio_type == 0) {
                 table_body.style.backgroundColor = "#FFFFFF";
                 table_body.style.backgroundImage = "url(ems_images/" + ems_page_image + ")";
@@ -3297,6 +3462,9 @@
                 table_body.style.backgroundImage = "";
             }
         }
+
+        // ------------------------------------------------
+
 
         function myRefresh() {
             /*
@@ -3779,12 +3947,21 @@
             window.close();
         }
 
+
+        // ------------------------------------------------
+
+
+        // 這邊會把選好的顏色帶回TOPOLOGY頁
+
         function load_lldp_init_neighbor() {
             if (!lldp_init_neighbor_ready) {
                 var v1 = getRandomInt(999);
                 var v2 = new Date().getMilliseconds();
                 document.lldp_init_neighbor.location.href = 'lldp_init_neighbor.htm?v=' + v1 + v2;
                 setTimeout("load_lldp_init_neighbor()", 500);
+
+
+
             }
             else {
                 if (master_enabled)
@@ -3794,6 +3971,10 @@
                 }
             }
         }
+
+
+        // ------------------------------------------------
+
 
         function myFunction(event) {
             if (network_draw_ready) {
