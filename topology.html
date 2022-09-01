@@ -3959,9 +3959,6 @@
                 var v2 = new Date().getMilliseconds();
                 document.lldp_init_neighbor.location.href = 'lldp_init_neighbor.htm?v=' + v1 + v2;
                 setTimeout("load_lldp_init_neighbor()", 500);
-
-
-
             }
             else {
                 if (master_enabled)
@@ -4019,6 +4016,45 @@
 
         load_lldp_init_neighbor();
         //document.body.addEventListener("wheel", myFunction);
+
+
+        // ------------------------------------------------
+
+
+        // 填背景色function
+        function myFunc(ev) {
+            // 把顏色轉成rgb形式 (原先是16進位)
+        
+            const color = ev.target.value
+
+            const r = parseInt(bg_color.substr(1, 2), 16);
+            const g = parseInt(bg_color.substr(3, 2), 16);
+            const b = parseInt(bg_color.substr(5, 2), 16);
+            console.log(`${r}, ${g}, ${b}`);
+
+            rgb_bg_color = [r, g, b];
+
+            // options.nodes.color.border = resBgColor(bg_color);
+            // options.edges.color = resBgColor(bg_color);
+            // options.nodes.color.highlight.border = resBgColor(bg_color);
+            // options.nodes.color.highlight.background = "#ffffff";
+
+            network = new vis.Network(container, data, options);
+        }
+
+        // 判斷背景顏色深淺
+        function resBgColor(bg_color) {
+            // 當color值大於128時 color值偏向255 即#ffffff (偏淺色)
+            // 此時字體顏色應為 黑色=#000000
+            // 當color值小於128時 color值偏向0 即#000000 (偏深色)
+            // 此時字體颜色應為 白色=#ffffff
+            var color = 0.213 * bg_color[0] + 0.715 * bg_color[1] + 0.072 * bg_color[2] > 255 / 2;
+            return color ? '#000000' : '#ffffff'
+        }
+
+
+
+
     </script>
 </body>
 
