@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>drag here to upload ur file</title>
+
+    <style>
+      * {
+        margin: 0 auto;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2.5%;
+      }
+
+      .upload-zone {
+        width: 300px;
+        height: 300px;
+        padding: 20px;
+        background-color: #dadada;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      /* dragenter後觸發的CSS樣式 */
+
+      .upload-zone-enter {
+        border: 8px dashed rgb(173, 173, 173);
+        background-clip: content-box;
+      }
+
+      /* input樣式檢查 */
+      input {
+        display: none;
+        width: 100%;
+        height: 100%;
+        /* outline: 1px solid black; */
+        cursor: pointer;
+      }
+
+      .text {
+        position: relative;
+        font-size: 1.6rem;
+        font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+          "Lucida Sans", Arial, sans-serif;
+        color: #dadada;
+        font-weight: 700;
+      }
+
+      .text::before {
+        content: "";
+        position: absolute;
+        top: -20%;
+        background-color: cadetblue;
+        width: 100%;
+        height: 140%;
+        z-index: -1;
+      }
+
+      .preview-image {
+        width: 200px;
+        height: 200px;
+        /* z-index: 999; */
+      }
+
+      img {
+        object-fit: cover;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="upLoadZone" class="upload-zone" onclick="handleFileSelect()">
+      <!-- <input type="file" accept="image/*"> -->
+      <!-- 使用accept 可以這樣限制檔案上傳類型 -->
+      <input type="file" id="fileUploader" onchange="handleFiles(this.files)" />
+      <div id="preview"></div>
+    </div>
+    <div class="text">Please drag your file here to upload</div>
+
+    <script>
+      // https://hackmd.io/@c36ICNyhQE6-iTXKxoIocg/HkSdHcJ9U
+
+      const dropbox = document.getElementById("upLoadZone");
+      const preview = document.getElementById("preview");
+      const fileUploader = document.getElementById("fileUploader");
+
+      // 監聽
+      // https://www.w3schools.com/jsref/met_document_addeventlistener.asp
+      // syntax=document.addEventListener(event, function, Capture);
+      // event=事件名字
+      // function=事件發生就執行這個function
+      // capture=寫布林值(true or false, default setting is false)
+      // true=The handler is executed in the capturing phase.
+      // false=The handler is executed in the bubbling phase.
+
+      fileUploader.addEventListener("click", handleFileSelect);
+      dropbox.addEventListener("dragenter", dragenter, false);
+      dropbox.addEventListener("dragover", dragover, false);
+      dropbox.addEventListener("drop", drop, false);
+      dropbox.addEventListener("dragleave", dragleave, false);
+
+      function dragenter(e) {
+        dropbox.classList.add("upload-zone-enter");
+        e.stopPropagation(); //終止事件傳導
+        e.preventDefault(); //終止預設行為
+        // console.log('enter');
+      }
+
+      function dragover(e) {
+        e.stopPropagation(); //終止事件傳導
+        e.preventDefault(); //終止預設行為
+        // console.log('over');
+      }
+
+      function drop(e) {
+        e.stopPropagation(); //終止事件傳導
+        e.preventDefault(); //終止預設行為
+
+        const dt = e.dataTransfer;
+        const files = dt.files;
+
+        handleFiles(files);
+
+        // console.log('drop');
+      }
+
+      function dragleave(e) {
+        dropbox.classList.remove("upload-zone-enter");
+        // console.log('leave');
+      }
+
+      // ------------------------------------------------------
+
+      // 這邊處理拉進來上傳 還要預覽
+      function handleFiles(files) {
+        for (var i = 0; i < files.length; i++) {
+          const file = files[i];
+        //  const imageType = /image.*/;
+        //  檔案上傳類型 這邊都可以
+
+            // if (!file.type.match(imageType)) {
+            //   continue;
+            // }
+
+          const img = document.createElement("img");
+          img.classList.add("preview-image");
+          img.file = file;
+          preview.appendChild(img); // 將圖片加到 preview 上
+
+          const reader = new FileReader();
+          reader.onload = (e) => (img.src = e.target.result);
+          reader.readAsDataURL(file);
+
+          //   console.log("我真的有做");
+        }
+      }
+
+      // 點選觸發上傳圖片
+
+      function handleFileSelect() {
+        console.log("有拉我聽到了");
+        fileUploader.click();
+      }
+
+    </script>
+  </body>
+</html>
