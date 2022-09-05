@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>topology</title>
+    <!-- 我能把兩個套件組在一起嗎@-@ 我做得到ㄇ -->
+
+    <!-- background check -->
+
+    <link rel="stylesheet" href="./css/examples.css">
+    <script src="./scripts/background-check.min.js"></script>
+    <script src="./scripts/drag.js"></script>
+    <script src="./scripts/main.js"></script>
+
+    <!-- vis network -->
+    <script type="text/javascript" src="./scripts/vis-network.min.js"></script>
+
+    <style>
+
+        * {
+            margin: 0 auto;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        }
+
+        body {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            font: 1.6rem 'Margarine';
+        }
+
+        #mynetwork {
+            width: 100vw;
+            height: 100vh;
+            /* border: 1px solid lightgray; */
+            background-color: #333333;
+            background-size: cover;
+        }
+
+        #form {
+            position: fixed;
+            top: 0;
+            z-index: 999;
+            display: flex;
+        }
+
+        input {
+            margin-right: 5px;
+        }
+
+        button {
+            padding-right: 10px;
+            padding-left: 10px;
+            letter-spacing: 0.1rem;
+            margin-right: 5px;
+        }
+        
+    </style>
+
+</head>
+
+<body onload="draw()">
+    <form id="form">
+        <input type="color" oninput="myFunc(event)">
+        <button type="button" onclick="addImg()">Set Image</button>
+        <button type="reset" onclick="toReset()">Reset</button>
+    </form>
+    <div id="mynetwork"></div>
+    <script>
+
+        // https://github.com/visjs/vis-network
+        // https://visjs.github.io/vis-network/docs/network/nodes.html
+
+        var VIS = null;
+        var DIR = "./img/";
+        var nodes = null;
+        var edges = null;
+        var network = null;
+        var container = null;
+        var data = null;
+        var options = null;
+
+
+        // Called when the Visualization API is loaded.
+        function draw() {
+            DIR = "./img/gateway.png";
+            nodes = [
+                { id: 1, shape: "circularImage", image: DIR },
+                { id: 2, shape: "image", image: DIR },
+                { id: 3, shape: "image", image: DIR },
+                { id: 4, shape: "image", image: DIR },
+                { id: 5, shape: "image", image: DIR },
+                { id: 6, shape: "circularImage", image: DIR },
+                { id: 7, shape: "image", image: DIR },
+                { id: 8, shape: "circularImage", image: DIR },
+                { id: 9, shape: "image", image: DIR },
+                { id: 10, shape: "image", image: DIR },
+                { id: 11, shape: "image", image: DIR },
+            ];
+
+            edges = [
+                { from: 1, to: 2 },
+                { from: 2, to: 3 },
+                { from: 2, to: 4 },
+                { from: 4, to: 5 },
+                { from: 4, to: 10 },
+                { from: 4, to: 6 },
+                { from: 6, to: 7 },
+                { from: 7, to: 8 },
+                { from: 8, to: 9 },
+                { from: 8, to: 10 },
+                { from: 10, to: 11 }
+            ];
+
+            // create a network
+
+            container = document.getElementById("mynetwork");
+
+            data = {
+                nodes: nodes,
+                edges: edges,
+            };
+
+            options = {
+                nodes: {
+                    borderWidth: 4,
+                    borderWidthSelected: 6,
+                    size: 24,
+                    color: {
+                        border: "transparent",
+                        background: "#d2d2d2c8",
+                        highlight: {
+                            border: "pink",
+                            background: "white",
+                        },
+                    },
+                    // color : {myNODEcolor_OBJ
+                    // },
+                    font: { color: "#eeeeee" },
+                    shapeProperties: {
+                        useBorderWithImage: true,
+                    },
+                },
+                edges: {
+                    color: "lightgray",
+                },
+            };
+
+            network = new vis.Network(container, data, options);
+        }
+
+        // -------------------------------------
+
+
+        // 填背景色function
+        function myFunc(ev) {
+            // 把顏色轉成rgb形式 (原先是16進位)
+            const color = ev.target.value
+            const r = parseInt(color.substr(1, 2), 16);
+            const g = parseInt(color.substr(3, 2), 16);
+            const b = parseInt(color.substr(5, 2), 16);
+            // console.log(`${r}, ${g}, ${b}`);
+
+            selectedColor = [r, g, b];
+            document.getElementById("mynetwork").style.backgroundColor = "rgb" + "(" + selectedColor.toString() + ")";
+
+            options.nodes.color.border = resBgColor(selectedColor);
+            options.edges.color = resBgColor(selectedColor);
+            options.nodes.color.highlight.border = resBgColor(selectedColor);
+            options.nodes.color.highlight.background = "#ffffff";
+
+            network = new vis.Network(container, data, options);
+        }
+
+        // 判斷背景顏色深淺
+        function resBgColor(selectedColor) {
+            // 當color值大於128時 color值偏向255 即#ffffff (偏淺色)
+            // 此時字體顏色應為 黑色=#000000
+            // 當color值小於128時 color值偏向0 即#000000 (偏深色)
+            // 此時字體颜色應為 白色=#ffffff
+            var color = 0.213 * selectedColor[0] + 0.715 * selectedColor[1] + 0.072 * selectedColor[2] > 255 / 2;
+            return color ? '#000000' : '#ffffff'
+        }
+
+        // 換背景圖
+        function addImg() {
+            document.getElementById("mynetwork").style.backgroundImage = "url('./img/ocean.jpg')";
+
+            draw();
+        }
+
+
+        // reset
+        function toReset() {
+            document.getElementById('form').reset();
+            document.getElementById("mynetwork").style.backgroundImage = "none";
+            document.getElementById("mynetwork").style.backgroundColor = "#ffffff";
+
+            draw();
+
+        }
+
+
+        // https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Operators/new
+
+
+    </script>
+
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-18542897-1']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+</body>
+
+</html>
