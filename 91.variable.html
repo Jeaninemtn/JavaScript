@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .container {
+            width: 200px;
+            height: 200px;
+            background-color: #aaf;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container container-a" onclick="myFunc('a')"></div>
+    <div class="container container-b" onclick="myFunc('b')"></div>
+    <div class="container container-c" onclick="myFunc('c')"></div>
+
+
+    <script>
+
+        function myFunc(name) {
+            var el = "container-" + name;
+            console.log(el);
+            console.log(typeof(el));  // string
+            document.querySelector("." + el).style.backgroundColor = "green";
+        }
+
+        // 可以在querySelector裡塞變數哩
+        // https://stackoverflow.com/questions/37081721/use-variables-in-document-queryselector
+
+    </script>
+</body>
+
+</html>
